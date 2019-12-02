@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/greet").then(function(response) {
+    fetch("http://localhost:8080/").then(function(response) {
       return response.text();
     }).then((text) => {
       this.setState({greeting: text})
