@@ -1,5 +1,8 @@
 package com.gnitko.studynote.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,12 +14,14 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id")
     private Project project;
 
+    @JsonBackReference
     @OneToMany(targetEntity = Note.class, mappedBy = "category",
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Note> notes;
 
     public Category() {

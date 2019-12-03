@@ -1,5 +1,8 @@
 package com.gnitko.studynote.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -23,8 +26,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
 
+    @JsonBackReference
     @OneToMany(targetEntity = Project.class, mappedBy = "user",
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Project> projects;
 
     public User() {

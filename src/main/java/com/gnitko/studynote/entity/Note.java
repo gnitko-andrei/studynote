@@ -1,5 +1,7 @@
 package com.gnitko.studynote.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
@@ -20,7 +22,8 @@ public class Note {
     @ColumnDefault(value = "'SEE_LATER'")
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id")
     private Category category;
 

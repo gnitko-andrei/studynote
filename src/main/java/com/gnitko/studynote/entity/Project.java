@@ -1,5 +1,7 @@
 package com.gnitko.studynote.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
@@ -19,12 +21,14 @@ public class Project {
     @ColumnDefault(value = "'SEE_LATER'")
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class, mappedBy = "project",
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private Set<Category> categories;
 
     public Project() {
