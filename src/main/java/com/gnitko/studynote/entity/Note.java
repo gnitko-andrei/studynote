@@ -23,7 +23,7 @@ public class Note {
     private String status;
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category_id")
     private Category category;
 

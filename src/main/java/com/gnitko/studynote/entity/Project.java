@@ -22,13 +22,13 @@ public class Project {
     private String status;
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class, mappedBy = "project",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private Set<Category> categories;
 
     public Project() {

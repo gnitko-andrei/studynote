@@ -15,13 +15,13 @@ public class Category {
     private String name;
 
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "project_id")
     private Project project;
 
     @JsonBackReference
     @OneToMany(targetEntity = Note.class, mappedBy = "category",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Note> notes;
 
     public Category() {
