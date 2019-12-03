@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import './main-page.css'
+import './home-page.css'
 import Header from "../header";
 import Footer from "../footer";
 
-export default class MainPage extends Component {
+export default class HomePage extends Component {
     render() {
         return (
             <div>
