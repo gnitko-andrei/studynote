@@ -8,12 +8,14 @@ export default class NotesList extends Component {
     render() {
         return (
             <div className="notes-list col-lg-3">
-                <div className="btn-group m-2" role="group">
+                <div className="btn-group-vertical m-2 filter" role="group">
+                    <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
                     <button type="button" className="btn btn-outline-primary">Текущие</button>
                     <button type="button" className="btn btn-outline-secondary">Завершённые</button>
                 </div>
                 <div className="list-group">
                     <div className="list-group-item list-group-item-action active">
+
                         <button type="button"
                                 className="btn btn-success btn-sm float-right">
                             <i className="fa fa-plus"></i>
