@@ -7,7 +7,7 @@ import Footer from "../footer";
 export default class LoginPage extends Component {
     render() {
         return (
-            <div>
+            <>
                 <Header/>
                 <div className="login-page form-group m-5">
                     <form action="" method="">
@@ -27,7 +27,7 @@ export default class LoginPage extends Component {
                     </form>
                 </div>
                 <Footer/>
-            </div>
+            </>
         );
     };
 }

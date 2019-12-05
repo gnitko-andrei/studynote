@@ -7,7 +7,7 @@ import Footer from "../footer";
 export default class HomePage extends Component {
     render() {
         return (
-            <div>
+            <>
                 <Header/>
                 <div className="home-page">
                     <div className="container-fluid jumbotron">
@@ -84,7 +84,7 @@ export default class HomePage extends Component {
                     </div>
                 </div>
                 <Footer/>
-            </div>
+            </>
         );
     };
 

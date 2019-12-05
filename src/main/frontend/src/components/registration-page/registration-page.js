@@ -7,7 +7,7 @@ import Footer from "../footer";
 export default class RegistrationPage extends Component {
     render() {
         return (
-            <div>
+            <>
                 <Header/>
                 <div className="registration-page form-group m-5">
                     <form action="" method="">
@@ -57,7 +57,7 @@ export default class RegistrationPage extends Component {
                     </form>
                 </div>
                 <Footer/>
-            </div>
+            </>
         );
     };
 }
