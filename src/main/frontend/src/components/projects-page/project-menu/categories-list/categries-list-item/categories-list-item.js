@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 import './categories-list-item.css'
+import NotesList from "./notes-list";
+
 
 export default class CategoriesListItem extends Component {
     render() {
@@ -21,9 +23,7 @@ export default class CategoriesListItem extends Component {
                 </a>
                 <div className="collapse" id={this.props.categoryName}>
                     <div className="card card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                        proident.
+                        <NotesList/>
                     </div>
                 </div>
             </>
