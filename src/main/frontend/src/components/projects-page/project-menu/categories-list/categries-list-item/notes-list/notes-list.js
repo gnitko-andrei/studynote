@@ -7,10 +7,10 @@ import NotesListItem from "./notes-list-item";
 export default class NotesList extends Component {
     render() {
         return (
-            <div className="notes-list col-lg-3">
+            <div className="notes-list">
                 <div className="btn-group-vertical m-2 filter" role="group">
                     <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
-                    <button type="button" className="btn btn-outline-primary">Текущие</button>
+                    <button type="button" className="btn btn-outline-primary">Изучаю</button>
                     <button type="button" className="btn btn-outline-secondary">Завершённые</button>
                 </div>
                 <div className="list-group">

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import './categories-list-item.css'
 import NotesList from "./notes-list";
+import NoteInfo from "./note-info";
 
 
 export default class CategoriesListItem extends Component {
@@ -23,8 +24,15 @@ export default class CategoriesListItem extends Component {
                 </a>
                 <div id={categoryName} className="collapse" aria-labelledby={categoryName + '-heading'}
                      data-parent="#categories-accordion">
-                    <div className="list-group-item">
-                        <NotesList/>
+                    <div className="row">
+                        <div className="col-5">
+                            <div className="list-group-item">
+                                <NotesList/>
+                            </div>
+                        </div>
+                        <div className="col-7">
+                            <NoteInfo/>
+                        </div>
                     </div>
                 </div>
             </>

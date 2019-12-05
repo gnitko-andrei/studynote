@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 
-import './project-menu.css';
-import CategoriesList from "./categories-list";
+import './note-info.css'
 
-export default class ProjectMenu extends Component {
+export default class NoteInfo extends Component {
     render() {
         return (
-            <div className="project-menu col-lg-8">
-                <h1>Project1</h1>
+            <>
+                <h1>Note1</h1>
+                <h4>Статус</h4>
+                <p>Изучаю</p>
+                <h4>Ссылка</h4>
+                <a href="#">www.somelink.xyz</a>
                 <h4>Описание</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique
@@ -17,9 +20,7 @@ export default class ProjectMenu extends Component {
                     Tristique senectus et netus et. Aenean et tortor at risus viverra adipiscing at. In tellus
                     integer feugiat scelerisque varius morbi enim nunc faucibus. Mauris cursus mattis molestie a
                     iaculis at erat pellentesque adipiscing.</p>
-                <CategoriesList/>
-            </div>
+            </>
         )
     }
-
 }
