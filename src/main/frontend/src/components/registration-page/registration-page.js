@@ -9,7 +9,7 @@ export default class RegistrationPage extends Component {
         return (
             <div>
                 <Header/>
-                <div className="login form-group m-5">
+                <div className="registration-page form-group m-5">
                     <form action="" method="">
                         <div className="form-group row">
                             <label className="col-lg-2 col-form-label"> Логин :</label>

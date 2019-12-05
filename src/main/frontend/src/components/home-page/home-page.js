@@ -9,7 +9,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <Header/>
-                <div className="main">
+                <div className="home-page">
                     <div className="container-fluid jumbotron">
                         <h4 className="text-info text-center">Часто занимаешься самообразованием?
                             Закладки браузера и заметки беспорядочно забиты ссылками?</h4>
@@ -64,20 +64,20 @@ export default class HomePage extends Component {
                             </p>
                             <div className="col">
                                 <div className="social linkedin">
-                                    <a href="https://www.linkedin.com/in/%D0%B0%D0%BD%D0%B4%D1%80%D0%B5%D0%B9-%D0%B3%D0%BD%D0%B8%D1%82%D1%8C%D0%BA%D0%BE-56925811b/"
-                                       target="_blank"><i className="fab fa-linkedin fa-2x"/></a>
+                                    <a href="https://www.linkedin.com/in/gnitko-andrei/"
+                                       target="_blank"><i className="fa fa-linkedin fa-2x"/></a>
                                 </div>
                                 <div className="social telegram">
                                     <a href="https://t.me/GnitkoAndrei" target="_blank"><i
-                                        className="fab fa-telegram fa-2x"/></a>
+                                        className="fa fa-telegram fa-2x"/></a>
                                 </div>
                                 <div className="social skype">
                                     <a href="https://join.skype.com/invite/bj4vYbnHggkp" target="_blank"><i
-                                        className="fab fa-skype fa-2x"/></a>
+                                        className="fa fa-skype fa-2x"/></a>
                                 </div>
                                 <div className="social github">
                                     <a href="https://github.com/gnitko-andrei" target="_blank"><i
-                                        className="fab fa-github fa-2x"/></a>
+                                        className="fa fa-github fa-2x"/></a>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import './logo.svg';
-import Main from "../main";
+import HomePage from "../home-page";
 import "./App.css";
+import LoginPage from "../login-page";
+import RegistrationPage from "../registration-page";
+import ProjectsPage from "../projects-page";
 
 
 
@@ -9,7 +12,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <Main/>
+            <ProjectsPage/>
         );
     };
 
