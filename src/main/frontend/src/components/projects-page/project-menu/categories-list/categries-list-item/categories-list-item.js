@@ -27,7 +27,7 @@ export default class CategoriesListItem extends Component {
                     <div className="row">
                         <div className="col-5">
                             <div className="list-group-item">
-                                <NotesList/>
+                                <NotesList categoryName={categoryName}/>
                             </div>
                         </div>
                         <div className="col-7">

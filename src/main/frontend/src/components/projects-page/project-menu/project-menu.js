@@ -53,7 +53,7 @@ export default class ProjectMenu extends Component {
         const {editProject, editFlag} = this.props;
         return (
             <div className="project-menu col-lg-8">
-                {!editFlag ? <EditProject onclick={editProject} /> : <ProjectInfo onclick={editProject}/>}
+                {editFlag ? <EditProject onclick={editProject} /> : <ProjectInfo onclick={editProject}/>}
                 <CategoriesList/>
             </div>
         )

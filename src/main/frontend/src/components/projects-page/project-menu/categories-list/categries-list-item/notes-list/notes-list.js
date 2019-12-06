@@ -6,6 +6,7 @@ import NotesListItem from "./notes-list-item";
 
 export default class NotesList extends Component {
     render() {
+        const {categoryName} = this.props;
         return (
             <div className="notes-list">
                 <div className="btn-group-vertical m-2 filter" role="group">
@@ -18,7 +19,7 @@ export default class NotesList extends Component {
 
                         <button type="button"
                                 className="btn btn-success btn-sm float-right" data-toggle="modal"
-                                data-target="#newNoteModal">
+                                data-target={'#' + categoryName + "NoteModal"}>
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>
@@ -30,12 +31,12 @@ export default class NotesList extends Component {
                     <NotesListItem noteName={'Note6'}/>
                 </div>
 
-                <div className="modal fade" id="newNoteModal" tabIndex="-1" role="dialog"
-                     aria-labelledby="newNoteModalTitle" aria-hidden="true">
+                <div className="modal fade" id={categoryName + "NoteModal"} tabIndex="-1" role="dialog"
+                     aria-labelledby={categoryName + "NoteModalTitle"} aria-hidden="true">
                     <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="newNoteModalTitle">Новая заметка</h5>
+                                <h5 className="modal-title" id={categoryName + "NoteModalTitle"}>Новая заметка</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
