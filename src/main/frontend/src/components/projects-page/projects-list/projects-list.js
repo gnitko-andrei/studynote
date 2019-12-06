@@ -6,7 +6,6 @@ import AddButton from "../../buttons/add-button";
 
 export default class ProjectsList extends Component {
     render() {
-        const {editProject} = this.props;
         return (
             <div className="project-list col-lg-3">
                 <div className="btn-group m-2" role="group">
@@ -18,12 +17,12 @@ export default class ProjectsList extends Component {
                         Проекты
                         <AddButton modalId="#newProjectModal"/>
                     </div>
-                    <ProjectsListItem projectName={'Project1'} editProject={editProject}/>
-                    <ProjectsListItem projectName={'Project2'} editProject={editProject}/>
-                    <ProjectsListItem projectName={'Project3'} editProject={editProject}/>
-                    <ProjectsListItem projectName={'Project4'} editProject={editProject}/>
-                    <ProjectsListItem projectName={'Project5'} editProject={editProject}/>
-                    <ProjectsListItem projectName={'Project6'} editProject={editProject}/>
+                    <ProjectsListItem projectName={'Project1'}/>
+                    <ProjectsListItem projectName={'Project2'}/>
+                    <ProjectsListItem projectName={'Project3'}/>
+                    <ProjectsListItem projectName={'Project4'}/>
+                    <ProjectsListItem projectName={'Project5'}/>
+                    <ProjectsListItem projectName={'Project6'}/>
                 </div>
 
                 <div className="modal fade" id="newProjectModal" tabIndex="-1" role="dialog"

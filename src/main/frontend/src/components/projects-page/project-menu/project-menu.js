@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 
 import './project-menu.css';
 import CategoriesList from "./categories-list";
+import DeleteButton from "../../buttons/delete-button";
+import EditButton from "../../buttons/edit-button";
 
 function EditProject(props) {
+    const {editProjectHandler} = props;
     return (
         <form className="m-3">
             <div className="form-group">
@@ -24,15 +27,18 @@ function EditProject(props) {
                 iaculis at erat pellentesque adipiscing.
                 </textarea>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={props.onclick}>Сохранить</button>
+            <button type="submit" className="btn btn-primary" onClick={editProjectHandler}>Сохранить</button>
         </form>
     );
 }
 
 function ProjectInfo(props) {
+    const {editProjectHandler} = props;
     return (
         <>
             <h1>Project1</h1>
+            <EditButton onClick={editProjectHandler}/>
+            <DeleteButton/>
             <h4>Описание</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                 labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique
@@ -48,12 +54,26 @@ function ProjectInfo(props) {
 
 
 export default class ProjectMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editProject: false
+        };
+        this.editProjectHandler = this.editProjectHandler.bind(this);
+    }
+
+    editProjectHandler = () => {
+        this.setState(state => ({
+            editProject: !state.editProject
+        }))
+    };
 
     render() {
-        const {editProject, editFlag} = this.props;
+        const {editProject} = this.state;
         return (
             <div className="project-menu col-lg-8">
-                {editFlag ? <EditProject onclick={editProject} /> : <ProjectInfo onclick={editProject}/>}
+                {editProject ? <EditProject editProjectHandler={this.editProjectHandler}/> :
+                    <ProjectInfo editProjectHandler={this.editProjectHandler}/>}
                 <CategoriesList/>
             </div>
         )

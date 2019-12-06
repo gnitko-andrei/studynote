@@ -6,7 +6,7 @@ export default class DeleteButton extends Component {
     render() {
         return (
             <button type="button"
-                    className="btn btn-outline-danger btn-sm float-right mx-1">
+                    className="btn btn-outline-danger btn-sm mx-1">
                 <i className="fa fa-trash-o"></i>
             </button>
         )
