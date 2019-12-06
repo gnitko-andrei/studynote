@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './categories-list-item.css'
 import NotesList from "./notes-list";
 import NoteInfo from "./note-info";
+import DeleteButton from "../../../../buttons/delete-button";
 
 function EditCategory(props) {
     return (
@@ -67,9 +68,7 @@ export default class CategoriesListItem extends Component {
                    data-toggle="collapse" data-target={'#' + categoryName} aria-expanded="false"
                    aria-controls={categoryName}>
                     {categoryName}
-                    <button type="button" className="btn btn-outline-danger btn-sm float-right mx-1">
-                        <i className="fa fa-trash-o"></i>
-                    </button>
+                    <DeleteButton/>
                     <button type="button" className="btn btn-outline-info btn-sm float-right"
                             onClick={this.editCategoryHandler}>
                         <i className="fa fa-edit"></i>

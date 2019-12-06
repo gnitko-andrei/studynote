@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 import './notes-list.css';
-import ProjectsListItem from "../../../../projects-list/projects-list-item";
 import NotesListItem from "./notes-list-item";
+import AddButton from "../../../../../buttons/add-button";
 
 export default class NotesList extends Component {
     render() {
@@ -16,12 +16,7 @@ export default class NotesList extends Component {
                 </div>
                 <div className="list-group">
                     <div className="list-group-item list-group-item-action active">
-
-                        <button type="button"
-                                className="btn btn-success btn-sm float-right" data-toggle="modal"
-                                data-target={'#' + categoryName + "NoteModal"}>
-                            <i className="fa fa-plus"></i>
-                        </button>
+                        <AddButton modalId={'#' + categoryName + "NoteModal"}/>
                     </div>
                     <NotesListItem noteName={'Note1'} editNoteHandler={editNoteHandler}/>
                     <NotesListItem noteName={'Note2'} editNoteHandler={editNoteHandler}/>

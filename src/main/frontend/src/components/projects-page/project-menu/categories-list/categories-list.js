@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import './categories-list.css';
 import CategoriesListItem from "./categries-list-item";
+import AddButton from "../../../buttons/add-button";
 
 export default class CategoriesList extends Component {
     render() {
@@ -11,11 +12,7 @@ export default class CategoriesList extends Component {
                     <div className="list-group">
                         <div className="list-group-item list-group-item-action active">
                             Категории
-                            <button type="button"
-                                    className="btn btn-success btn-sm float-right" data-toggle="modal"
-                                    data-target="#newCategoryModal">
-                                <i className="fa fa-plus"></i>
-                            </button>
+                            <AddButton modalId="#newCategoryModal"/>
                         </div>
                         <CategoriesListItem categoryName='Книги'/>
                         <CategoriesListItem categoryName='Туториалы'/>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import './projects-list.css';
 import ProjectsListItem from "./projects-list-item";
+import AddButton from "../../buttons/add-button";
 
 export default class ProjectsList extends Component {
     render() {
@@ -15,11 +16,7 @@ export default class ProjectsList extends Component {
                 <div className="list-group">
                     <div className="list-group-item list-group-item-action active">
                         Проекты
-                        <button type="button"
-                                className="btn btn-success btn-sm float-right" data-toggle="modal"
-                                data-target="#newProjectModal">
-                            <i className="fa fa-plus"></i>
-                        </button>
+                        <AddButton modalId="#newProjectModal"/>
                     </div>
                     <ProjectsListItem projectName={'Project1'} editProject={editProject}/>
                     <ProjectsListItem projectName={'Project2'} editProject={editProject}/>
