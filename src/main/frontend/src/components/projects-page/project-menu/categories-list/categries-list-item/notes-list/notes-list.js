@@ -6,7 +6,7 @@ import NotesListItem from "./notes-list-item";
 
 export default class NotesList extends Component {
     render() {
-        const {categoryName} = this.props;
+        const {categoryName, editNoteHandler} = this.props;
         return (
             <div className="notes-list">
                 <div className="btn-group-vertical m-2 filter" role="group">
@@ -23,12 +23,12 @@ export default class NotesList extends Component {
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>
-                    <NotesListItem noteName={'Note1'}/>
-                    <NotesListItem noteName={'Note2'}/>
-                    <NotesListItem noteName={'Note3'}/>
-                    <NotesListItem noteName={'Note4'}/>
-                    <NotesListItem noteName={'Note5'}/>
-                    <NotesListItem noteName={'Note6'}/>
+                    <NotesListItem noteName={'Note1'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note2'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note3'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note4'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note5'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note6'} editNoteHandler={editNoteHandler}/>
                 </div>
 
                 <div className="modal fade" id={categoryName + "NoteModal"} tabIndex="-1" role="dialog"

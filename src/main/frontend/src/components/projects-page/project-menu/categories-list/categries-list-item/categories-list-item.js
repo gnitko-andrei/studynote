@@ -18,15 +18,16 @@ function EditCategory(props) {
 }
 
 function CategoryBody(props) {
+    const {categoryName, editNoteHandler, editNote} = props;
     return (
         <div className="row">
             <div className="col-5">
                 <div className="list-group-item">
-                    <NotesList categoryName={props.categoryName}/>
+                    <NotesList categoryName={categoryName} editNoteHandler={editNoteHandler}/>
                 </div>
             </div>
             <div className="col-7">
-                <NoteInfo/>
+                <NoteInfo editNote={editNote} editNoteHandler={editNoteHandler}/>
             </div>
         </div>
     );
@@ -36,7 +37,8 @@ export default class CategoriesListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editCategory: true,
+            editCategory: false,
+            editNote: false,
             show: ""
         };
         this.editCategoryHandler = this.editCategoryHandler.bind(this);
@@ -50,9 +52,15 @@ export default class CategoriesListItem extends Component {
         }));
     };
 
+    editNoteHandler = () => {
+        this.setState(state => ({
+            editNote: !state.editNote
+        }));
+    };
+
     render() {
         const {categoryName} = this.props;
-        const {editCategory, show} = this.state;
+        const {editCategory, editNote, show} = this.state;
         return (
             <>
                 <a href="#" className="list-group-item list-group-item-action" id={categoryName + '-heading'}
@@ -62,14 +70,15 @@ export default class CategoriesListItem extends Component {
                     <button type="button" className="btn btn-outline-danger btn-sm float-right mx-1">
                         <i className="fa fa-trash-o"></i>
                     </button>
-                    <button type="button" className="btn btn-outline-info btn-sm float-right" onClick={this.editCategoryHandler}>
+                    <button type="button" className="btn btn-outline-info btn-sm float-right"
+                            onClick={this.editCategoryHandler}>
                         <i className="fa fa-edit"></i>
                     </button>
                 </a>
                 <div id={categoryName} className={"collapse" + show} aria-labelledby={categoryName + '-heading'}
                      data-parent="#categories-accordion">
-                    {editCategory ? <CategoryBody categoryName={categoryName}/> : <EditCategory onclick={this.editCategoryHandler}/>}
-
+                    {editCategory ? <EditCategory onclick={this.editCategoryHandler}/> :
+                        <CategoryBody categoryName={categoryName} editNoteHandler={this.editNoteHandler} editNote={editNote}/>}
                 </div>
             </>
         )
