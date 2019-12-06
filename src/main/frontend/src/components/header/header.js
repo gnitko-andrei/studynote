@@ -18,7 +18,6 @@ export default class Header extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item"><a href="#" className="nav-link">Текущее</a></li>
                             <li className="nav-item"><a href="#" className="nav-link">Проекты</a></li>
                             <li className="nav-item"><a href="#" className="nav-link">Личный кабинет</a></li>
                             <li className="nav-item"><a href="#" className="nav-link">Панель администратора</a></li>

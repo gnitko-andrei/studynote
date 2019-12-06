@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 
 import './projects-list-item.css'
 
+
 export  default class ProjectsListItem extends Component{
     render() {
+        const {editProject} = this.props;
         return (
             <a href="#" className="list-group-item list-group-item-action">{this.props.projectName}
                 <button type="button"
@@ -11,7 +13,7 @@ export  default class ProjectsListItem extends Component{
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <button type="button"
-                        className="btn btn-outline-info btn-sm float-right">
+                        className="btn btn-outline-info btn-sm float-right" onClick={editProject}>
                     <i className="fa fa-edit"></i>
                 </button>
             </a>
