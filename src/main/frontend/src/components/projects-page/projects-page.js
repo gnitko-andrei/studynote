@@ -10,14 +10,14 @@ export default class ProjectsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editProject: true
+            editProject: false
         };
         this.editProjectHandler = this.editProjectHandler.bind(this);
     }
 
     editProjectHandler = () => {
         this.setState(state => ({
-            edit: !state.edit
+            editProject: !state.editProject
         }))
     };
 
@@ -27,7 +27,7 @@ export default class ProjectsPage extends Component {
                 <Header/>
                 <div className="projects-page row">
                     <ProjectsList editProject={this.editProjectHandler}/>
-                    <ProjectMenu editProject={this.editProjectHandler} editFlag={this.state.edit}/>
+                    <ProjectMenu editProject={this.editProjectHandler} editFlag={this.state.editProject}/>
                 </div>
                 <Footer/>
             </>
