@@ -3,13 +3,21 @@ import React, {Component} from 'react';
 import './notes-list.css';
 import NotesListItem from "./notes-list-item";
 import AddButton from "../../../../../buttons/add-button";
+import DeleteButton from "../../../../../buttons/delete-button";
+import EditButton from "../../../../../buttons/edit-button";
 
 export default class NotesList extends Component {
     render() {
-        const {categoryName, editNoteHandler} = this.props;
+        const {categoryName, editCategoryHandler} = this.props;
         return (
             <div className="notes-list">
-                <div className="btn-group-vertical m-2 filter" role="group">
+                <h4 className="text-center my-2">
+                    {categoryName}
+                    <EditButton onClick={editCategoryHandler}/>
+                    <DeleteButton/>
+                </h4>
+
+                <div className="btn-group-vertical btn-group-sm my-2" role="group">
                     <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
                     <button type="button" className="btn btn-outline-primary">Изучаю</button>
                     <button type="button" className="btn btn-outline-secondary">Завершённые</button>
@@ -18,12 +26,12 @@ export default class NotesList extends Component {
                     <div className="list-group-item list-group-item-action active">
                         <AddButton modalId={'#' + categoryName + "NoteModal"}/>
                     </div>
-                    <NotesListItem noteName={'Note1'} editNoteHandler={editNoteHandler}/>
-                    <NotesListItem noteName={'Note2'} editNoteHandler={editNoteHandler}/>
-                    <NotesListItem noteName={'Note3'} editNoteHandler={editNoteHandler}/>
-                    <NotesListItem noteName={'Note4'} editNoteHandler={editNoteHandler}/>
-                    <NotesListItem noteName={'Note5'} editNoteHandler={editNoteHandler}/>
-                    <NotesListItem noteName={'Note6'} editNoteHandler={editNoteHandler}/>
+                    <NotesListItem noteName={'Note1'}/>
+                    <NotesListItem noteName={'Note2'}/>
+                    <NotesListItem noteName={'Note3'}/>
+                    <NotesListItem noteName={'Note4'}/>
+                    <NotesListItem noteName={'Note5'}/>
+                    <NotesListItem noteName={'Note6'}/>
                 </div>
 
                 <div className="modal fade" id={categoryName + "NoteModal"} tabIndex="-1" role="dialog"

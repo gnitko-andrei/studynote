@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 import './note-info.css'
+import DeleteButton from "../../../../../buttons/delete-button";
+import EditButton from "../../../../../buttons/edit-button";
 
 function EditNote(props) {
     return (
@@ -18,7 +20,7 @@ function EditNote(props) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="noteStatus">Статус</label>
-                    <div className="btn-group m-2" role="group" id="noteStatus">
+                    <div className="btn-group-vertical m-2" role="group" id="noteStatus">
                         <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
                         <button type="button" className="btn btn-outline-primary">Изучаю</button>
                         <button type="button" className="btn btn-outline-secondary">Завершённые</button>
@@ -45,9 +47,14 @@ function EditNote(props) {
 }
 
 function NoteBody(props) {
+    const {editNoteHandler} = props;
     return (
         <>
-            <h1>Note1</h1>
+            <h3 className="my-3">
+                Note1
+                <EditButton onClick={editNoteHandler}/>
+                <DeleteButton/>
+            </h3>
             <h4>Статус</h4>
             <p>Изучаю</p>
             <h4>Ссылка</h4>
@@ -66,11 +73,25 @@ function NoteBody(props) {
 }
 
 export default class NoteInfo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editNote: false
+        }
+    }
+
+    editNoteHandler = () => {
+        this.setState(state => ({
+            editNote: !state.editNote
+        }));
+    };
+
     render() {
-        const {editNote} = this.props;
+        const {editNote} = this.state;
         return (
             <>
-                {editNote ? <EditNote/> : <NoteBody/>}
+                {editNote ? <EditNote editNoteHandler={this.editNoteHandler}/> :
+                    <NoteBody editNoteHandler={this.editNoteHandler}/>}
             </>
         )
     }

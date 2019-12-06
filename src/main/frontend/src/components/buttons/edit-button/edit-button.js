@@ -7,7 +7,7 @@ export default class EditButton extends Component {
         const {onClick} = this.props;
         return (
             <button type="button"
-                    className="btn btn-outline-info btn-sm" onClick={onClick}>
+                    className="btn btn-outline-info btn-sm ml-1" onClick={onClick}>
                 <i className="fa fa-edit"></i>
             </button>
         )

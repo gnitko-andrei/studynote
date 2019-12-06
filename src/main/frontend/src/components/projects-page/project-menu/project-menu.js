@@ -36,9 +36,12 @@ function ProjectInfo(props) {
     const {editProjectHandler} = props;
     return (
         <>
-            <h1>Project1</h1>
-            <EditButton onClick={editProjectHandler}/>
-            <DeleteButton/>
+            <h2>
+                Project1
+                <EditButton onClick={editProjectHandler}/>
+                <DeleteButton/>
+            </h2>
+
             <h4>Описание</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                 labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique
@@ -71,7 +74,7 @@ export default class ProjectMenu extends Component {
     render() {
         const {editProject} = this.state;
         return (
-            <div className="project-menu col-lg-8">
+            <div className="project-menu col-lg-8 ml-4">
                 {editProject ? <EditProject editProjectHandler={this.editProjectHandler}/> :
                     <ProjectInfo editProjectHandler={this.editProjectHandler}/>}
                 <CategoriesList/>

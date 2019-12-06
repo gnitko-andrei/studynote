@@ -7,7 +7,7 @@ import AddButton from "../../buttons/add-button";
 export default class ProjectsList extends Component {
     render() {
         return (
-            <div className="project-list col-lg-3">
+            <div className="project-list col-lg-3 ml-4">
                 <div className="btn-group m-2" role="group">
                     <button type="button" className="btn btn-outline-primary">Текущие</button>
                     <button type="button" className="btn btn-outline-secondary">Завершённые</button>
