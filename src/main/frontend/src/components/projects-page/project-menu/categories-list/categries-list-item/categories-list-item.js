@@ -36,20 +36,23 @@ export default class CategoriesListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editCategory: true
+            editCategory: true,
+            show: ""
         };
         this.editCategoryHandler = this.editCategoryHandler.bind(this);
     }
 
-    editCategoryHandler = () => {
+    editCategoryHandler = (event) => {
+        event.stopPropagation();
         this.setState(state => ({
-            editCategory: !state.editCategory
-        }))
+            editCategory: !state.editCategory,
+            show: state.editCategory ? " show" : ""
+        }));
     };
 
     render() {
         const {categoryName} = this.props;
-        const {editCategory} = this.state;
+        const {editCategory, show} = this.state;
         return (
             <>
                 <a href="#" className="list-group-item list-group-item-action" id={categoryName + '-heading'}
@@ -63,7 +66,7 @@ export default class CategoriesListItem extends Component {
                         <i className="fa fa-edit"></i>
                     </button>
                 </a>
-                <div id={categoryName} className="collapse" aria-labelledby={categoryName + '-heading'}
+                <div id={categoryName} className={"collapse" + show} aria-labelledby={categoryName + '-heading'}
                      data-parent="#categories-accordion">
                     {editCategory ? <CategoryBody categoryName={categoryName}/> : <EditCategory onclick={this.editCategoryHandler}/>}
 
