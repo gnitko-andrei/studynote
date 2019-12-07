@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 
 import './notes-list.css';
 import NotesListItem from "./notes-list-item";
-import AddButton from "../../../../../buttons/add-button";
-import DeleteButton from "../../../../../buttons/delete-button";
-import EditButton from "../../../../../buttons/edit-button";
+import AddButton from "../../../../../../common/buttons/add-button";
+import EditButton from "../../../../../../common/buttons/edit-button";
+import DeleteButton from "../../../../../../common/buttons/delete-button";
+
 
 export default class NotesList extends Component {
     render() {

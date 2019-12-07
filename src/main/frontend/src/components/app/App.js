@@ -1,11 +1,11 @@
 import React from 'react';
 import './logo.svg';
-import HomePage from "../home-page";
 import "./App.css";
-import LoginPage from "../login-page";
-import RegistrationPage from "../registration-page";
-import ProjectsPage from "../projects-page";
-import UserProfilePage from "../user-profile-page";
+import ProjectsPage from "../pages/projects-page";
+import HomePage from "../pages/home-page";
+import LoginPage from "../pages/login-page";
+import RegistrationPage from "../pages/registration-page";
+import UserProfilePage from "../pages/user-profile-page";
 
 
 

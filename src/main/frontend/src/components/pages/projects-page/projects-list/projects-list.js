@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import './projects-list.css';
 import ProjectsListItem from "./projects-list-item";
-import AddButton from "../../buttons/add-button";
+import AddButton from "../../../common/buttons/add-button";
+
 
 export default class ProjectsList extends Component {
     render() {

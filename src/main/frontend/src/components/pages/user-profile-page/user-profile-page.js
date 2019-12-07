@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 
 import './user-profile-page.css';
-import Header from "../header";
-import Footer from "../footer";
-import EditButton from "../buttons/edit-button";
-import DeleteButton from "../buttons/delete-button";
+import Header from "../../common/header";
+import Footer from "../../common/footer";
+import EditButton from "../../common/buttons/edit-button";
+import DeleteButton from "../../common/buttons/delete-button";
+
 
 
 function UserInfo(props) {

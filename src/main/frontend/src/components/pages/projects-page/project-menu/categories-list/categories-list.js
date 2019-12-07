@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 import './categories-list.css';
 import CategoriesListItem from "./categries-list-item";
-import AddButton from "../../../buttons/add-button";
+import AddButton from "../../../../common/buttons/add-button";
+
 
 export default class CategoriesList extends Component {
     render() {

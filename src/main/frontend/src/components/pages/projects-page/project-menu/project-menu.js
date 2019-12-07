@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 
 import './project-menu.css';
 import CategoriesList from "./categories-list";
-import DeleteButton from "../../buttons/delete-button";
-import EditButton from "../../buttons/edit-button";
+import EditButton from "../../../common/buttons/edit-button";
+import DeleteButton from "../../../common/buttons/delete-button";
+
 
 function EditProject(props) {
     const {editProjectHandler} = props;

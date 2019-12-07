@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 
 import './home-page.css'
-import Header from "../header";
-import Footer from "../footer";
+import Header from "../../common/header";
+import Footer from "../../common/footer";
+
 
 export default class HomePage extends Component {
     render() {

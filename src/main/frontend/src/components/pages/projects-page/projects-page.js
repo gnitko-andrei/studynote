@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 
 import './projects-page.css'
-import Header from "../header";
-import Footer from "../footer";
+import Header from "../../common/header";
+import Footer from "../../common/footer";
 import ProjectsList from "./projects-list";
 import ProjectMenu from "./project-menu";
+
 
 export default class ProjectsPage extends Component {
     render() {
