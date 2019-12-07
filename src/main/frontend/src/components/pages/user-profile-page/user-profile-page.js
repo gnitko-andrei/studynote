@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 
 import './user-profile-page.css';
-import Header from "../../common/header";
-import Footer from "../../common/footer";
 import EditButton from "../../common/buttons/edit-button";
 import DeleteButton from "../../common/buttons/delete-button";
-
 
 
 function UserInfo(props) {
@@ -98,14 +95,10 @@ export default class UserProfilePage extends Component {
     render() {
         const {editUser} = this.state;
         return (
-            <>
-                <Header/>
-                <div className="user-profile-page container m-5">
-                    {editUser ? <EditUser editUserHandler={this.editUserHandler}/> :
-                        <UserInfo editUserHandler={this.editUserHandler}/>}
-                </div>
-                <Footer/>
-            </>
+            <div className="user-profile-page container m-5">
+                {editUser ? <EditUser editUserHandler={this.editUserHandler}/> :
+                    <UserInfo editUserHandler={this.editUserHandler}/>}
+            </div>
         )
     }
 }

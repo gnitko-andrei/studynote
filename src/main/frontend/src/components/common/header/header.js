@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 
 import './header.css'
+import {Link} from 'react-router-dom';
 
 export default class Header extends Component {
     render() {
         return (
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <a href="#" className="navbar-brand">
+                    <Link to="/" className="navbar-brand">
                         <img className="mx-1" src="https://image.flaticon.com/icons/svg/29/29302.svg" width="30"
                              height="30" alt="logo"/>
-                        StudyNote</a>
+                        StudyNote</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -19,14 +20,14 @@ export default class Header extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item"><a href="#" className="nav-link">Проекты</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link">Личный кабинет</a></li>
+                            <li className="nav-item"><Link to="/projects" className="nav-link">Проекты</Link></li>
+                            <li className="nav-item"><Link to="/user-profile" className="nav-link">Личный кабинет</Link></li>
                         </ul>
                         <form className="login-form form-inline ">
-                            <a href="#" className="btn btn-outline-primary btn-sm mx-1"
-                               role="button">Войти</a>
-                            <a href="#" className="btn btn-outline-secondary btn-sm mx-1"
-                               role="button">Регистрация</a>
+                            <Link to="/login" className="btn btn-outline-primary btn-sm mx-1"
+                               role="button">Войти</Link>
+                            <Link to="/registration" className="btn btn-outline-secondary btn-sm mx-1"
+                               role="button">Регистрация</Link>
                         </form>
                     </div>
 
