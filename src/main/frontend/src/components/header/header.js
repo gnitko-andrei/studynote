@@ -8,7 +8,8 @@ export default class Header extends Component {
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <a href="#" className="navbar-brand">
-                        <img className="mx-1" src="https://image.flaticon.com/icons/svg/29/29302.svg" width="30" height="30" alt="logo" />
+                        <img className="mx-1" src="https://image.flaticon.com/icons/svg/29/29302.svg" width="30"
+                             height="30" alt="logo"/>
                         StudyNote</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent"
@@ -20,7 +21,6 @@ export default class Header extends Component {
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item"><a href="#" className="nav-link">Проекты</a></li>
                             <li className="nav-item"><a href="#" className="nav-link">Личный кабинет</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link">Панель администратора</a></li>
                         </ul>
                         <form className="login-form form-inline ">
                             <a href="#" className="btn btn-outline-primary btn-sm mx-1"
