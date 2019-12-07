@@ -8,12 +8,14 @@ function EditCategory(props) {
     const {editCategoryHandler} = props;
     return (
         <form className="m-3 row">
-            <div className="form-group-inline row col-lg-9 mx-2">
+            <div className="form-group-inline row col-lg-7 mx-2">
                 <label className="col-lg-3 col-form-label" htmlFor="categoryName">Название</label>
                 <input type="text" className="form-control col-lg-9" id="categoryName" value="Category1">
                 </input>
             </div>
-            <button type="submit" className="btn btn-primary col-lg-2 m-2" onClick={editCategoryHandler}>Сохранить
+            <button type="submit" className="btn btn-primary col-lg-2 mx-1" onClick={editCategoryHandler}>Сохранить
+            </button>
+            <button type="button" className="btn btn-secondary col-lg-2 mx-1" onClick={editCategoryHandler}>Отмена
             </button>
         </form>
     );

@@ -27,7 +27,8 @@ function EditProject(props) {
                 iaculis at erat pellentesque adipiscing.
                 </textarea>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={editProjectHandler}>Сохранить</button>
+            <button type="submit" className="btn btn-primary mx-1" onClick={editProjectHandler}>Сохранить</button>
+            <button type="button" className="btn btn-secondary mx-1" onClick={editProjectHandler}>Отмена</button>
         </form>
     );
 }

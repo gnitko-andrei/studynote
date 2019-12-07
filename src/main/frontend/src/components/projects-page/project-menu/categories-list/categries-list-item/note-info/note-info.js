@@ -40,7 +40,8 @@ function EditNote(props) {
                 iaculis at erat pellentesque adipiscing.
                 </textarea>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={props.editNoteHandler}>Сохранить</button>
+                <button type="submit" className="btn btn-primary mx-1" onClick={props.editNoteHandler}>Сохранить</button>
+                <button type="button" className="btn btn-secondary mx-1" onClick={props.editNoteHandler}>Отмена</button>
             </form>
         </>
     )
