@@ -20,16 +20,14 @@ public class ProjectController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/{username}/projects")
-    public List<Project> getAllUserProjects(@PathVariable String username) {
-        User user = userRepo.findByUsername(username).get();
+    @GetMapping("/{user}/projects")
+    public List<Project> getAllUserProjects(@PathVariable User user) {
         return projectRepo.findAllByUser(user);
     }
 
-    @GetMapping("/projects/{projectName}")
-    public Project getUserProjectByName(@PathVariable String username,
-                                            @PathVariable String projectName) {
-        return projectRepo.findByName(projectName).get();
+    @GetMapping("/projects/{project}")
+    public Project getUserProjectByName(@PathVariable Project project) {
+        return project;
     }
 
 }

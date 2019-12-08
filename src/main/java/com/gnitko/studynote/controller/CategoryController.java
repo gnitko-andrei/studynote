@@ -20,14 +20,13 @@ public class CategoryController {
         this.projectRepo = projectRepo;
     }
 
-    @GetMapping("/{projectName}/categories")
-    public List<Category> getAllProjectCategories(@PathVariable String projectName) {
-        Project project = projectRepo.findByName(projectName).get();
+    @GetMapping("/{project}/categories")
+    public List<Category> getAllProjectCategories(@PathVariable Project project) {
         return categoryRepo.findAllByProject(project);
     }
 
-    @GetMapping("categories/{categoryName}")
-    public Category getProjectCategoryByName(@PathVariable String categoryName) {
-        return categoryRepo.findByName(categoryName).get();
+    @GetMapping("categories/{category}")
+    public Category getProjectCategoryByName(@PathVariable Category category) {
+        return category;
     }
 }
