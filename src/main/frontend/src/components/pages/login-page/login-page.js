@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import './login-page.css';
+import {Link} from "react-router-dom";
 
 export default class LoginPage extends Component {
     render() {
@@ -21,6 +22,7 @@ export default class LoginPage extends Component {
                         </div>
                     </div>
                     <button className="btn btn-primary" type="submit">Войти</button>
+                    <Link className="badge badge-light m-2" to="/registration">Зарегистрироваться</Link>
                 </form>
             </div>
         );

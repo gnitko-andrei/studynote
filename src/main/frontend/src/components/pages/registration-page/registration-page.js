@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import './registration-page.css';
 
+import {Link} from 'react-router-dom';
+
 export default class RegistrationPage extends Component {
     render() {
         return (
@@ -49,7 +51,7 @@ export default class RegistrationPage extends Component {
                         </div>
                     </div>
                     <button className="btn btn-primary" type="submit">Регистрация</button>
-                    <a className="badge badge-light m-2" href="#">Уже зарегистрированы? Войти</a>
+                    <Link className="badge badge-light m-2" to="/login">Уже зарегистрированы? Войти</Link>
                 </form>
             </div>
         );
