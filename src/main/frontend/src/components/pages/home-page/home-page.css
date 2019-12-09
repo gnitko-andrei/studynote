@@ -1,0 +1,55 @@
+.description-list {
+    font-size: x-large;
+}
+
+.description-list .badge {
+    vertical-align: middle;
+    max-width: 400px;
+    margin-left: 2px;
+    margin-right: 2px;
+
+}
+
+.content-types img {
+    height: 70%;
+    width: 70%;
+    margin: 1em;
+}
+
+.contacts {
+    padding-bottom: 50px;
+}
+
+.social a {
+    text-align: center;
+    width: 46px;
+    height: 46px;
+    float: left;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    border-radius: 46px;
+    margin: 0 10px 10px 0;
+    padding: 6px;
+    color: #000;
+}
+
+.github a:hover {
+    background: #191919;
+    color: #fff;
+}
+
+.skype a:hover {
+    background: #00aff0;
+    color: #fff;
+}
+
+.linkedin a:hover {
+    background: #0e76a8;
+    color: #fff;
+}
+
+.telegram a:hover {
+    background: #249bd7;
+    color: #fff;
+}
