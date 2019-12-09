@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 
-    @GetMapping("/greet")
+    @GetMapping("/")
     @CrossOrigin("http://localhost:3000")
-    public String greet() {
+    public String main() {
         return "Hello world";
     }
 }
