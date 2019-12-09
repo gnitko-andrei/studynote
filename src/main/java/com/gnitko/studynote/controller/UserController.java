@@ -21,8 +21,8 @@ public class UserController {
         return userRepo.findAll();
     }
 
-    @GetMapping("/users/{userId}")
-    public User getAllUsers(@PathVariable Long userId) {
-        return userRepo.findById(userId).get();
+    @GetMapping("/users/{user}")
+    public User getAllUsers(@PathVariable User user) {
+        return user;
     }
 }

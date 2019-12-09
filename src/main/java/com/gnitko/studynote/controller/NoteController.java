@@ -20,14 +20,13 @@ public class NoteController {
         this.categoryRepo = categoryRepo;
     }
 
-    @GetMapping("/{categoryName}/notes")
-    public List<Note> getAllCategoryNotes(@PathVariable String categoryName) {
-        Category category = categoryRepo.findByName(categoryName).get();
+    @GetMapping("/{category}/notes")
+    public List<Note> getAllCategoryNotes(@PathVariable Category category) {
         return noteRepo.findAllByCategory(category);
     }
 
-    @GetMapping("/notes/{noteName}")
-    public Note getCategoryNoteByName(@PathVariable String noteName) {
-        return noteRepo.findByName(noteName).get();
+    @GetMapping("/notes/{note}")
+    public Note getCategoryNoteByName(@PathVariable Note note) {
+        return note;
     }
 }

@@ -4,6 +4,8 @@ import com.gnitko.studynote.entity.Project;
 import com.gnitko.studynote.entity.User;
 import com.gnitko.studynote.repo.ProjectRepo;
 import com.gnitko.studynote.repo.UserRepo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +22,15 @@ public class ProjectController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/{username}/projects")
-    public List<Project> getAllUserProjects(@PathVariable String username) {
-        User user = userRepo.findByUsername(username).get();
+    @GetMapping("/projects")
+    public List<Project> getAllProjects(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userRepo.findByUsername(userDetails.getUsername()).get();
         return projectRepo.findAllByUser(user);
     }
 
-    @GetMapping("/projects/{projectName}")
-    public Project getUserProjectByName(@PathVariable String username,
-                                            @PathVariable String projectName) {
-        return projectRepo.findByName(projectName).get();
+    @GetMapping("/projects/{project}")
+    public Project getUserProjectByName(@PathVariable Project project) {
+        return project;
     }
 
 }
