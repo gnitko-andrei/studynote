@@ -2,6 +2,7 @@ package com.gnitko.studynote.controller;
 
 import com.gnitko.studynote.entity.User;
 import com.gnitko.studynote.repo.UserRepo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class UserController {
     private final UserRepo userRepo;
 

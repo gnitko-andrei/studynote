@@ -4,6 +4,7 @@ import com.gnitko.studynote.entity.Category;
 import com.gnitko.studynote.entity.Project;
 import com.gnitko.studynote.repo.CategoryRepo;
 import com.gnitko.studynote.repo.ProjectRepo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CategoryController {
     private final CategoryRepo categoryRepo;
     private final ProjectRepo projectRepo;
