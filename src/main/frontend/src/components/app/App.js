@@ -17,8 +17,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false,
-            user: 'no auth'
+            user: 'no auth',
+            loggedIn: localStorage.getItem('loggedIn')
         }
     }
 
@@ -27,26 +27,31 @@ class App extends React.Component {
         const f = getAction("/user").then((data) => {
             if(data) {
                 this.setState({
-                    user: data.username,
+                    user: data,
+                    username: data.username,
                     loggedIn: true
-                })
+                });
+                localStorage.setItem('loggedIn', this.state.loggedIn);
             } else {
                 this.setState({
                     user: null,
+                    username: null,
                     loggedIn: false
-                })
+                });
+                localStorage.setItem('loggedIn', this.state.loggedIn);
             }
         });
     }
 
     componentDidMount() {
         this.getUser();
+
     }
         render() {
-        const {loggedIn, user} = this.state;
+        const {loggedIn, user, username} = this.state;
         return (
             <Router>
-                <Header user={user}
+                <Header username={username}
                         loggedIn={loggedIn}/>
                 <Switch>
                     <Route path="/" component={HomePage} exact/>
@@ -57,7 +62,8 @@ class App extends React.Component {
                         <RegistrationPage loggedIn={loggedIn}/>
                     )}/>
                     <Route path="/user-profile" render={() => (
-                        <UserProfilePage loggedIn={loggedIn}/>
+                        <UserProfilePage user={user}
+                                         loggedIn={loggedIn}/>
                     )}/>
                     <Route path="/projects" render={() => (
                         <ProjectsPage loggedIn={loggedIn}/>

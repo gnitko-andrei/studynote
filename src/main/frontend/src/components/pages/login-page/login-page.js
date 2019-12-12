@@ -31,7 +31,6 @@ export default class LoginPage extends Component {
 
     render() {
         const {loggedIn} = this.props;
-        const {isSubmit} = this.state
         if(loggedIn) {
             return <Redirect to="/"/>
         }

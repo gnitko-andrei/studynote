@@ -63,7 +63,7 @@ export default class RegistrationPage extends Component {
 
         return (
             <>
-            {loggedIn ? <Registration/> : <Redirect to="/"/>}
+            {!loggedIn ? <Registration/> : <Redirect to="/"/>}
             </>
         );
     };
