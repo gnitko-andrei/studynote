@@ -21,7 +21,7 @@ function Logout(props) {
         <form onSubmit={handleSubmit}>
             <span className="mx-1">{username}</span>
             <button className="btn btn-outline-secondary btn-sm mx-1"
-                    role="submit">Выйти</button>
+                    role="submit" to="/">Выйти</button>
         </form>
     )
 
@@ -30,6 +30,7 @@ function Logout(props) {
 export default class Header extends Component {
     handleSubmit = () => {
         localStorage.setItem('authData', '');
+        localStorage.setItem('loggedIn', '');
     };
     render() {
         const {loggedIn, username} = this.props;

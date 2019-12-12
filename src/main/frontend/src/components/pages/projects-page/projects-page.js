@@ -7,6 +7,13 @@ import ProjectMenu from "./project-menu";
 import requests from "../../../requests/requests";
 
 export default class ProjectsPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            projects: [],
+            currentProject: null
+        }
+    }
     getProjects() {
         const {getAction} = requests;
         const f = getAction("/projects").then((data) => {
@@ -26,15 +33,22 @@ export default class ProjectsPage extends Component {
         this.getProjects();
     }
 
+    setCurrentProject = (project) => {
+        this.setState({
+            currentProject: project
+        })
+    }
+
     render() {
+        const {projects, currentProject} = this.state;
         const {loggedIn} = this.props;
         if(!loggedIn) {
             return <Redirect to="/login"/>
         }
         return (
             <div className="projects-page row">
-                <ProjectsList/>
-                <ProjectMenu/>
+                <ProjectsList projects={projects} setCurrentProject={this.setCurrentProject}/>
+                <ProjectMenu currentProject={currentProject}/>
             </div>
         );
     }

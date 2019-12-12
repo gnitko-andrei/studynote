@@ -7,6 +7,10 @@ import AddButton from "../../../../common/buttons/add-button";
 
 export default class CategoriesList extends Component {
     render() {
+        const {currentProject} = this.props;
+        if(!currentProject) {
+            return (<></>)
+        }
         return (
             <>
                 <div className="accordion" id="categories-accordion">
