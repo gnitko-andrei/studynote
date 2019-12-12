@@ -5,9 +5,11 @@ const headers = {
     'Content-type': 'application/json',
     Accept: 'application/json;charset=UTF-8',
     'Access-Control-Allow-Origin': '*'
-}
+};
 
-const authdata = window.btoa(`user2:1`);
+let authdata1 = window.btoa(`user2:1`);
+let authdata = localStorage.getItem('authData')
+
 headers.Authorization = 'Basic ' + authdata;
 
 const apiPathUrl = 'http://localhost:8080';

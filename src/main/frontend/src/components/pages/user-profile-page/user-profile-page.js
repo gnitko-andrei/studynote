@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 
 import './user-profile-page.css';
 import EditButton from "../../common/buttons/edit-button";
@@ -94,6 +95,10 @@ export default class UserProfilePage extends Component {
 
     render() {
         const {editUser} = this.state;
+        const {loggedIn} = this.props;
+        if(!loggedIn) {
+            return <Redirect to="/login"/>
+        }
         return (
             <div className="user-profile-page container m-5">
                 {editUser ? <EditUser editUserHandler={this.editUserHandler}/> :
