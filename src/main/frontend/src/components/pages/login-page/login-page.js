@@ -31,7 +31,7 @@ export default class LoginPage extends Component {
 
     render() {
         const {loggedIn} = this.props;
-        if(loggedIn) {
+        if (loggedIn) {
             return <Redirect to="/"/>
         }
         return (
@@ -42,14 +42,14 @@ export default class LoginPage extends Component {
                         <div className="col-lg-6">
                             <input type="text" name="username"
                                    className="form-control" onChange={this.handleInputChange}
-                            value={this.state.username}/>
+                                   value={this.state.username}/>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-lg-1 col-form-label"> Пароль:</label>
                         <div className="col-lg-6">
                             <input type="password" name="password"
-                                   className="form-control"  onChange={this.handleInputChange}
+                                   className="form-control" onChange={this.handleInputChange}
                                    value={this.state.password}/>
                         </div>
                     </div>

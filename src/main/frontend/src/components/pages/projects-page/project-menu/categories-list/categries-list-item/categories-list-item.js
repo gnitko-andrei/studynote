@@ -23,7 +23,16 @@ function EditCategory(props) {
 }
 
 function CategoryBody(props) {
-    const {categoryName, editCategoryHandler, notes, setCurrentNote, currentNote} = props
+    const {loading, categoryName, editCategoryHandler, notes, setCurrentNote, currentNote} = props;
+    if (loading) {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border text-info" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="row">
             <div className="col-lg-4">
@@ -44,6 +53,7 @@ export default class CategoriesListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             editCategory: false,
             categoryId: props.categoryId,
             currentNote: null
@@ -54,9 +64,10 @@ export default class CategoriesListItem extends Component {
         const {getAction} = requests;
         const {categoryId} = this.state;
 
-        const f = getAction(`/${categoryId}/notes`).then((data) => {
-            if(data) {
+        getAction(`/${categoryId}/notes`).then((data) => {
+            if (data) {
                 this.setState({
+                    loading: false,
                     notes: data
                 });
             } else {
@@ -82,22 +93,23 @@ export default class CategoriesListItem extends Component {
         this.setState({
             currentNote: note
         })
-    }
+    };
 
     render() {
         const {categoryName} = this.props;
-        const {editCategory, notes, currentNote} = this.state;
+        const {loading, editCategory, notes, currentNote} = this.state;
         return (
             <>
-                <a href="#" className="list-group-item list-group-item-action" id={categoryName + '-heading'}
+                <button className="list-group-item list-group-item-action" id={categoryName + '-heading'}
                    data-toggle="collapse" data-target={'#' + categoryName} aria-expanded="false"
                    aria-controls={categoryName}>
                     {categoryName}
-                </a>
+                </button>
                 <div id={categoryName} className="collapse" aria-labelledby={categoryName + '-heading'}
                      data-parent="#categories-accordion">
-                    {editCategory ? <EditCategory categoryName={categoryName} editCategoryHandler={this.editCategoryHandler}/> :
-                        <CategoryBody notes={notes} categoryName={categoryName}
+                    {editCategory ?
+                        <EditCategory categoryName={categoryName} editCategoryHandler={this.editCategoryHandler}/> :
+                        <CategoryBody loading={loading} notes={notes} categoryName={categoryName}
                                       setCurrentNote={this.setCurrentNote}
                                       currentNote={currentNote}
                                       editCategoryHandler={this.editCategoryHandler}/>}

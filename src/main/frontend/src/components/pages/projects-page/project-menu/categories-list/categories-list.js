@@ -10,17 +10,20 @@ export default class CategoriesList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             categories: [],
             projectId: null
         };
     }
+
     getCategories() {
         const {getAction} = requests;
         const {projectId} = this.state;
 
-        const f = getAction(`/${projectId}/categories`).then((data) => {
-            if(data) {
+        getAction(`/${projectId}/categories`).then((data) => {
+            if (data) {
                 this.setState({
+                    loading: false,
                     categories: data
                 });
             } else {
@@ -41,10 +44,10 @@ export default class CategoriesList extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {currentProject} = this.props;
-        if(prevState.projectId !== this.state.projectId){
+        if (prevState.projectId !== this.state.projectId) {
             this.getCategories();
         }
-        if(prevProps.currentProject !== currentProject){
+        if (prevProps.currentProject !== currentProject) {
             this.setState({
                 projectId: currentProject.id
             });
@@ -52,8 +55,16 @@ export default class CategoriesList extends Component {
     }
 
     render() {
-        const {currentProject} = this.props;
-        const {categories} = this.state;
+        const {loading, categories} = this.state;
+        if (loading) {
+            return (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-info" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
+        }
         return (
             <>
                 <div className="accordion" id="categories-accordion">
@@ -64,10 +75,10 @@ export default class CategoriesList extends Component {
                         </div>
                         {
                             categories.map((category) =>
-                            <CategoriesListItem key={category.id}
-                                              categoryName={category.name}
-                                                categoryId={category.id}/>
-                        )}
+                                <CategoriesListItem key={category.id}
+                                                    categoryName={category.name}
+                                                    categoryId={category.id}/>
+                            )}
                     </div>
                 </div>
 

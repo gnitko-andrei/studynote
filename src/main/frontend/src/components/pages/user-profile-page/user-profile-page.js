@@ -8,7 +8,7 @@ import DeleteButton from "../../common/buttons/delete-button";
 
 function UserInfo(props) {
     const {editUserHandler} = props;
-    const {username, firstName, lastName, email } = props.user
+    const {username, firstName, lastName, email} = props.user;
     return (
         <>
             <dl className='row my-2'>
@@ -29,7 +29,7 @@ function UserInfo(props) {
 
 function EditUser(props) {
     const {editUserHandler} = props;
-    const {username, firstName, lastName, email } = props.user
+    const {username, firstName, lastName, email} = props.user;
     return (
         <>
             <form className="m-3">
@@ -98,7 +98,7 @@ export default class UserProfilePage extends Component {
     render() {
         const {editUser} = this.state;
         const {loggedIn, user} = this.props;
-        if(!loggedIn) {
+        if (!loggedIn) {
             return <Redirect to="/login"/>
         }
         return (

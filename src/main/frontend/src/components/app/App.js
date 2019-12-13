@@ -24,8 +24,8 @@ class App extends React.Component {
 
     getUser() {
         const {getAction} = requests;
-        const f = getAction("/user").then((data) => {
-            if(data) {
+        getAction("/user").then((data) => {
+            if (data) {
                 this.setState({
                     user: data,
                     username: data.username,
@@ -47,7 +47,8 @@ class App extends React.Component {
         this.getUser();
 
     }
-        render() {
+
+    render() {
         const {loggedIn, user, username} = this.state;
         return (
             <Router>
@@ -57,7 +58,7 @@ class App extends React.Component {
                     <Route path="/" component={HomePage} exact/>
                     <Route path="/login" render={() => (
                         <LoginPage loggedIn={loggedIn}/>
-                        )}/>
+                    )}/>
                     <Route path="/registration" render={() => (
                         <RegistrationPage loggedIn={loggedIn}/>
                     )}/>

@@ -17,7 +17,8 @@ function EditProject(props) {
             </div>
             <div className="form-group">
                 <label htmlFor="projectDescription">Описание</label>
-                <textarea className="form-control" id="projectDescription" rows="5" defaultValue={currentProject.description}>
+                <textarea className="form-control" id="projectDescription" rows="5"
+                          defaultValue={currentProject.description}>
                 </textarea>
             </div>
             <button type="submit" className="btn btn-primary mx-1" onClick={editProjectHandler}>Сохранить</button>
@@ -61,12 +62,13 @@ export default class ProjectMenu extends Component {
     render() {
         const {editProject} = this.state;
         const {currentProject} = this.props;
-        if(!currentProject) {
+        if (!currentProject) {
             return (<h5>Выберите проект из списка</h5>)
         }
         return (
             <div className="project-menu col-lg-8 ml-4">
-                {editProject ? <EditProject currentProject={currentProject} editProjectHandler={this.editProjectHandler}/> :
+                {editProject ?
+                    <EditProject currentProject={currentProject} editProjectHandler={this.editProjectHandler}/> :
                     <ProjectInfo currentProject={currentProject} editProjectHandler={this.editProjectHandler}/>}
                 <CategoriesList currentProject={currentProject}/>
             </div>

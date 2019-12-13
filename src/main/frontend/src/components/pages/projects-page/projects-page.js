@@ -10,15 +10,18 @@ export default class ProjectsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             projects: [],
             currentProject: null
         }
     }
+
     getProjects() {
         const {getAction} = requests;
         const f = getAction("/projects").then((data) => {
-            if(data) {
+            if (data) {
                 this.setState({
+                    loading: false,
                     projects: data
                 });
             } else {
@@ -40,10 +43,19 @@ export default class ProjectsPage extends Component {
     };
 
     render() {
-        const {projects, currentProject} = this.state;
+        const {loading, projects, currentProject} = this.state;
         const {loggedIn} = this.props;
-        if(!loggedIn) {
+        if (!loggedIn) {
             return <Redirect to="/login"/>
+        }
+        if (loading) {
+            return (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-info" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
         }
         return (
             <div className="projects-page row">

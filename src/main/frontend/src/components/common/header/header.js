@@ -21,7 +21,8 @@ function Logout(props) {
         <form onSubmit={handleSubmit}>
             <span className="mx-1">{username}</span>
             <button className="btn btn-outline-secondary btn-sm mx-1"
-                    role="submit" to="/">Выйти</button>
+                    role="submit" to="/">Выйти
+            </button>
         </form>
     )
 
@@ -32,6 +33,7 @@ export default class Header extends Component {
         localStorage.setItem('authData', '');
         localStorage.setItem('loggedIn', '');
     };
+
     render() {
         const {loggedIn, username} = this.props;
         return (
@@ -49,8 +51,10 @@ export default class Header extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item" ><Link to="/projects" className="nav-link" hidden={!loggedIn}>Проекты</Link></li>
-                            <li className="nav-item" ><Link to="/user-profile" className="nav-link" hidden={!loggedIn}>Личный кабинет</Link></li>
+                            <li className="nav-item"><Link to="/projects" className="nav-link"
+                                                           hidden={!loggedIn}>Проекты</Link></li>
+                            <li className="nav-item"><Link to="/user-profile" className="nav-link" hidden={!loggedIn}>Личный
+                                кабинет</Link></li>
                         </ul>
                     </div>
                     {!loggedIn ? <Login/> : <Logout username={username} handleSubmit={this.handleSubmit}/>}

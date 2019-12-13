@@ -10,10 +10,6 @@ export default class ProjectsList extends Component {
         const {projects, setCurrentProject} = this.props;
         return (
             <div className="project-list col-lg-3 ml-4">
-                <div className="btn-group m-2" role="group">
-                    <button type="button" className="btn btn-outline-primary">Текущие</button>
-                    <button type="button" className="btn btn-outline-secondary">Завершённые</button>
-                </div>
                 <div className="list-group">
                     <div className="list-group-item list-group-item-action active">
                         Проекты
@@ -21,7 +17,7 @@ export default class ProjectsList extends Component {
                     </div>
                     {projects.map((project) =>
                         <ProjectsListItem key={project.id}
-                            project={project}
+                                          project={project}
                                           setCurrentProject={setCurrentProject}/>
                     )}
                 </div>
@@ -45,7 +41,7 @@ export default class ProjectsList extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="projectDescription">Описание</label>
-                                        <textarea className="form-control" id="projectDescription" rows="5"></textarea>
+                                        <textarea className="form-control" id="projectDescription" rows="5"/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

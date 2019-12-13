@@ -5,8 +5,6 @@ import NotesListItem from "./notes-list-item";
 import AddButton from "../../../../../../common/buttons/add-button";
 import EditButton from "../../../../../../common/buttons/edit-button";
 import DeleteButton from "../../../../../../common/buttons/delete-button";
-import ProjectsListItem from "../../../../projects-list/projects-list-item";
-
 
 export default class NotesList extends Component {
     constructor(props) {
@@ -25,7 +23,7 @@ export default class NotesList extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {notes} = this.props;
-        if(prevProps.notes !== notes){
+        if (prevProps.notes !== notes) {
             this.setState({
                 notes: notes
             });
@@ -33,10 +31,10 @@ export default class NotesList extends Component {
     }
 
     render() {
-    const {notes} = this.state;
-    const {setCurrentNote} = this.props;
+        const {notes} = this.state;
+        const {setCurrentNote} = this.props;
         const {categoryName, editCategoryHandler} = this.props;
-        if(!notes) {
+        if (!notes) {
             return (<></>)
         }
         return (
@@ -86,7 +84,7 @@ export default class NotesList extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="projectDescription">Описание</label>
-                                        <textarea className="form-control" id="projectDescription" rows="5"></textarea>
+                                        <textarea className="form-control" id="projectDescription" rows="5"/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

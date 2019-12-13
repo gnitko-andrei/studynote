@@ -7,12 +7,13 @@ export default class NotesListItem extends Component {
         const {note, setCurrentNote} = this.props;
         setCurrentNote(note);
     };
+
     render() {
         const {note} = this.props;
         return (
-            <a onClick={this.handleClick} className="list-group-item list-group-item-action">
+            <button onClick={this.handleClick} className="list-group-item list-group-item-action">
                 {note.name}
-            </a>
+            </button>
         )
     }
 }

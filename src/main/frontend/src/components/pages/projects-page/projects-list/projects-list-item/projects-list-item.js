@@ -7,12 +7,13 @@ export default class ProjectsListItem extends Component {
         const {project, setCurrentProject} = this.props;
         setCurrentProject(project);
     };
+
     render() {
         const {project} = this.props;
         return (
-            <a onClick={this.handleClick} className="list-group-item list-group-item-action">
+            <button onClick={this.handleClick} className="list-group-item list-group-item-action">
                 {project.name}
-            </a>
+            </button>
         );
     }
 
