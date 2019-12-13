@@ -8,7 +8,7 @@ const headers = {
 };
 
 let authdata1 = window.btoa(`user2:1`);
-let authdata = localStorage.getItem('authData')
+let authdata = localStorage.getItem('authData');
 
 headers.Authorization = 'Basic ' + authdata;
 
@@ -23,7 +23,7 @@ function queryParams(params) {
         .join('&');
 }
 
-const credentials = 'same-origin'
+const credentials = 'same-origin';
 
 const async = {
     getJSON({ url, params }) {

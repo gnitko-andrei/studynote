@@ -28,9 +28,6 @@ function EditProject(props) {
 
 function ProjectInfo(props) {
     const {editProjectHandler, currentProject} = props;
-    if(!currentProject) {
-        return (<h5>Выберите проект из списка</h5>)
-    }
     return (
         <>
             <h2>
@@ -64,6 +61,9 @@ export default class ProjectMenu extends Component {
     render() {
         const {editProject} = this.state;
         const {currentProject} = this.props;
+        if(!currentProject) {
+            return (<h5>Выберите проект из списка</h5>)
+        }
         return (
             <div className="project-menu col-lg-8 ml-4">
                 {editProject ? <EditProject currentProject={currentProject} editProjectHandler={this.editProjectHandler}/> :

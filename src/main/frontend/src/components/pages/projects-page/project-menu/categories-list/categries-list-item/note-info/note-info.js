@@ -90,6 +90,10 @@ export default class NoteInfo extends Component {
 
     render() {
         const {editNote} = this.state;
+        const {currentNote} = this.props;
+        if(!currentNote) {
+            return (<h5>Выберите заметку из списка</h5>)
+        }
         return (
             <>
                 {editNote ? <EditNote editNoteHandler={this.editNoteHandler}/> :

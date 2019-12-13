@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin
 public class ProjectController {
     private final ProjectRepo projectRepo;
     private final UserRepo userRepo;
@@ -23,7 +23,7 @@ public class ProjectController {
         this.projectRepo = projectRepo;
         this.userRepo = userRepo;
     }
-    @CrossOrigin
+
     @GetMapping("/projects")
     public List<Project> getAllProjects(@AuthenticationPrincipal UserDetails userDetails) {
         User user = userRepo.findByUsername(userDetails.getUsername()).get();

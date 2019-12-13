@@ -3,14 +3,57 @@ import React, {Component} from 'react';
 import './categories-list.css';
 import CategoriesListItem from "./categries-list-item";
 import AddButton from "../../../../common/buttons/add-button";
+import requests from "../../../../../requests/requests";
 
 
 export default class CategoriesList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            categories: [],
+            projectId: null
+        };
+    }
+    getCategories() {
+        const {getAction} = requests;
+        const {projectId} = this.state;
+
+        const f = getAction(`/${projectId}/categories`).then((data) => {
+            if(data) {
+                this.setState({
+                    categories: data
+                });
+            } else {
+                this.setState({
+                    categories: null
+                });
+            }
+        });
+    }
+
+    componentDidMount() {
+        const {currentProject} = this.props;
+        this.setState({
+            projectId: currentProject.id
+        });
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {currentProject} = this.props;
+        if(prevState.projectId !== this.state.projectId){
+            this.getCategories();
+        }
+        if(prevProps.currentProject !== currentProject){
+            this.setState({
+                projectId: currentProject.id
+            });
+        }
+    }
+
     render() {
         const {currentProject} = this.props;
-        if(!currentProject) {
-            return (<></>)
-        }
+        const {categories} = this.state;
         return (
             <>
                 <div className="accordion" id="categories-accordion">
@@ -19,10 +62,12 @@ export default class CategoriesList extends Component {
                             Категории
                             <AddButton modalId="#newCategoryModal"/>
                         </div>
-                        <CategoriesListItem categoryName='Книги'/>
-                        <CategoriesListItem categoryName='Туториалы'/>
-                        <CategoriesListItem categoryName='Видео'/>
-                        <CategoriesListItem categoryName='Ссылки'/>
+                        {
+                            categories.map((category) =>
+                            <CategoriesListItem key={category.id}
+                                              categoryName={category.name}
+                                                categoryId={category.id}/>
+                        )}
                     </div>
                 </div>
 

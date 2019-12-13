@@ -37,7 +37,7 @@ export default class ProjectsPage extends Component {
         this.setState({
             currentProject: project
         })
-    }
+    };
 
     render() {
         const {projects, currentProject} = this.state;

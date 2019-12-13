@@ -26,9 +26,6 @@ export default class HomePage extends Component {
                         <p className="badge badge-dark text-wrap">Используй готовые категории материалов для
                             максимального удобства
                         </p>
-                        <p className="badge badge-dark text-wrap">Отслеживай изучаемые в данный момент материалы во
-                            вкладке Текущее
-                        </p>
                     </div>
                     <h5 className="text-center">Сохраняй всё в одном месте</h5>
                     <div className="content-types text-center row">

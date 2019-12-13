@@ -5,11 +5,40 @@ import NotesListItem from "./notes-list-item";
 import AddButton from "../../../../../../common/buttons/add-button";
 import EditButton from "../../../../../../common/buttons/edit-button";
 import DeleteButton from "../../../../../../common/buttons/delete-button";
+import ProjectsListItem from "../../../../projects-list/projects-list-item";
 
 
 export default class NotesList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            notes: []
+        };
+    }
+
+    componentDidMount() {
+        const {notes} = this.props;
+        this.setState({
+            notes: notes
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const {notes} = this.props;
+        if(prevProps.notes !== notes){
+            this.setState({
+                notes: notes
+            });
+        }
+    }
+
     render() {
+    const {notes} = this.state;
+    const {setCurrentNote} = this.props;
         const {categoryName, editCategoryHandler} = this.props;
+        if(!notes) {
+            return (<></>)
+        }
         return (
             <div className="notes-list">
                 <h4 className="text-center my-2">
@@ -27,12 +56,11 @@ export default class NotesList extends Component {
                     <div className="list-group-item list-group-item-action active">
                         <AddButton modalId={'#' + categoryName + "NoteModal"}/>
                     </div>
-                    <NotesListItem noteName={'Note1'}/>
-                    <NotesListItem noteName={'Note2'}/>
-                    <NotesListItem noteName={'Note3'}/>
-                    <NotesListItem noteName={'Note4'}/>
-                    <NotesListItem noteName={'Note5'}/>
-                    <NotesListItem noteName={'Note6'}/>
+                    {notes.map((note) =>
+                        <NotesListItem key={note.id}
+                                       note={note}
+                                       setCurrentNote={setCurrentNote}/>
+                    )}
                 </div>
 
                 <div className="modal fade" id={categoryName + "NoteModal"} tabIndex="-1" role="dialog"
