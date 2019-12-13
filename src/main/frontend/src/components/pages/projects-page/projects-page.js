@@ -5,6 +5,7 @@ import './projects-page.css'
 import ProjectsList from "./projects-list";
 import ProjectMenu from "./project-menu";
 import requests from "../../../requests/requests";
+import ErrorIndicator from "../../common/error-indicator";
 
 export default class ProjectsPage extends Component {
     constructor(props) {
@@ -12,13 +13,14 @@ export default class ProjectsPage extends Component {
         this.state = {
             loading: true,
             projects: [],
-            currentProject: null
+            currentProject: null,
+            error: false
         }
     }
 
     getProjects() {
         const {getAction} = requests;
-        const f = getAction("/projects").then((data) => {
+        getAction("/projects").then((data) => {
             if (data) {
                 this.setState({
                     loading: false,
@@ -26,7 +28,8 @@ export default class ProjectsPage extends Component {
                 });
             } else {
                 this.setState({
-                    projects: null
+                    projects: null,
+                    error: true
                 });
             }
         });
@@ -43,8 +46,11 @@ export default class ProjectsPage extends Component {
     };
 
     render() {
-        const {loading, projects, currentProject} = this.state;
+        const {loading, projects, currentProject, error} = this.state;
         const {loggedIn} = this.props;
+        if(error) {
+            return <ErrorIndicator/>
+        }
         if (!loggedIn) {
             return <Redirect to="/login"/>
         }

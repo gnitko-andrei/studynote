@@ -4,6 +4,7 @@ import './categories-list-item.css'
 import NotesList from "./notes-list";
 import NoteInfo from "./note-info";
 import requests from "../../../../../../requests/requests";
+import ErrorIndicator from "../../../../../common/error-indicator";
 
 function EditCategory(props) {
     const {editCategoryHandler, categoryName} = props;
@@ -56,7 +57,8 @@ export default class CategoriesListItem extends Component {
             loading: true,
             editCategory: false,
             categoryId: props.categoryId,
-            currentNote: null
+            currentNote: null,
+            error: false
         };
     }
 
@@ -72,7 +74,8 @@ export default class CategoriesListItem extends Component {
                 });
             } else {
                 this.setState({
-                    notes: null
+                    notes: null,
+                    error: true
                 });
             }
         });
@@ -97,7 +100,10 @@ export default class CategoriesListItem extends Component {
 
     render() {
         const {categoryName} = this.props;
-        const {loading, editCategory, notes, currentNote} = this.state;
+        const {loading, editCategory, notes, currentNote, error} = this.state;
+        if(error) {
+            return <ErrorIndicator/>
+        }
         return (
             <>
                 <button className="list-group-item list-group-item-action" id={categoryName + '-heading'}

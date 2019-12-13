@@ -4,6 +4,7 @@ import './categories-list.css';
 import CategoriesListItem from "./categries-list-item";
 import AddButton from "../../../../common/buttons/add-button";
 import requests from "../../../../../requests/requests";
+import ErrorIndicator from "../../../../common/error-indicator";
 
 
 export default class CategoriesList extends Component {
@@ -12,7 +13,8 @@ export default class CategoriesList extends Component {
         this.state = {
             loading: true,
             categories: [],
-            projectId: null
+            projectId: null,
+            error: false
         };
     }
 
@@ -28,7 +30,8 @@ export default class CategoriesList extends Component {
                 });
             } else {
                 this.setState({
-                    categories: null
+                    categories: null,
+                    error: true
                 });
             }
         });
@@ -55,7 +58,10 @@ export default class CategoriesList extends Component {
     }
 
     render() {
-        const {loading, categories} = this.state;
+        const {loading, categories, error} = this.state;
+        if(error) {
+            return <ErrorIndicator/>
+        }
         if (loading) {
             return (
                 <div className="d-flex justify-content-center">
