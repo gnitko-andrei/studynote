@@ -125,7 +125,7 @@ export default class CategoriesList extends Component {
                                     <div className="form-group">
                                         <label htmlFor="categoryName">Название</label>
                                         <input type="text" className="form-control" id="categoryName"
-                                               name="categoryName"
+                                               name="categoryName" required
                                                onChange={this.handleInputChange} value={this.state.categoryName}/>
                                     </div>
                                 </div>

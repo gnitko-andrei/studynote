@@ -68,7 +68,7 @@ export default class ProjectsList extends Component {
                                     <div className="form-group">
                                         <label htmlFor="projectName">Название</label>
                                         <input type="text" className="form-control" id="projectName"
-                                               name="projectName"
+                                               name="projectName" required
                                                onChange={this.handleInputChange} value={this.state.projectName}/>
                                     </div>
                                     <div className="form-group">

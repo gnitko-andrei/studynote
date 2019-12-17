@@ -116,13 +116,13 @@ export default class NotesList extends Component {
                                     <div className="form-group">
                                         <label htmlFor="noteName">Название</label>
                                         <input type="text" className="form-control" id="noteName"
-                                               name="noteName"
+                                               name="noteName" required
                                                onChange={this.handleInputChange} value={this.state.noteName}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="noteLink">Ссылка</label>
                                         <input type="text" className="form-control" id="noteLink"
-                                               name="noteLink"
+                                               name="noteLink" required
                                                onChange={this.handleInputChange} value={this.state.noteLink}/>
                                     </div>
                                     <div className="form-group">

@@ -30,27 +30,32 @@ export default class RegistrationPage extends Component {
         this.setState({
             [name]: value
         });
+        this.validatePassword();
     };
 
     handleSubmit = (event) => {
-        const {username, password, confirmPassword, email,
+        const {username, password, email,
             firstName, lastName} = this.state;
-        if(username === '') {
-            alert('Введите имя пользователя')
-        } if(email === '') {
-            alert('Введите адрес электронной почты')
-        } else if(password === confirmPassword) {
-            const user = {
-                username: username,
-                password: password,
-                email: email,
-                firstName: firstName,
-                lastName: lastName
-            };
-            this.newUser(user);
+        const user = {
+            username: username,
+            password: password,
+            email: email,
+            firstName: firstName,
+            lastName: lastName
+        };
+        this.newUser(user);
+    };
+
+    validatePassword = () => {
+        const input = document.getElementById("password");
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        if(password !== confirmPassword) {
+            input.setCustomValidity('Пароли не совпадают')
         } else {
-            alert('Пароли не совпадают')
+            input.setCustomValidity('')
         }
+
     };
 
     render() {
@@ -67,22 +72,22 @@ export default class RegistrationPage extends Component {
                         <label className="col-lg-2 col-form-label"> Логин :</label>
                         <div className="col-lg-6">
                             <input type="text" name="username" className="form-control"
-                                   onChange={this.handleInputChange} value={this.state.username}/>
+                                   onChange={this.handleInputChange} value={this.state.username} required/>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-lg-2 col-form-label">Пароль:</label>
                         <div className="col-lg-6">
-                            <input type="password" name="password" className="form-control"
-                                   onChange={this.handleInputChange} value={this.state.password}/>
+                            <input type="password" name="password" className="form-control" id="password"
+                                   onChange={this.handleInputChange} value={this.state.password} required/>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-lg-2 col-form-label">Подтверждение пароля:</label>
                         <div className="col-lg-6">
                             <input type="password" name="confirmPassword" className="form-control"
-                                   aria-describedby="confirmPasswordHelp"
-                                   onChange={this.handleInputChange} value={this.state.confirmPassword}/>
+                                   aria-describedby="confirmPasswordHelp" id="confirmPassword"
+                                   onChange={this.handleInputChange} value={this.state.confirmPassword} required/>
                             <small id="confirmPasswordHelp" className="form-text text-muted">
                                 Введите пароль ещё раз чтобы проверить что вы не ошиблись
                             </small>
@@ -92,7 +97,7 @@ export default class RegistrationPage extends Component {
                         <label className="col-lg-2 col-form-label">Адрес электронной почты:</label>
                         <div className="col-lg-6">
                             <input type="email" name="email" className="form-control"
-                                   onChange={this.handleInputChange} value={this.state.email}/>
+                                   onChange={this.handleInputChange} value={this.state.email} required/>
                         </div>
                     </div>
                     <div className="form-group row">

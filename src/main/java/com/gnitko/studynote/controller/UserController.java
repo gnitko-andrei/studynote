@@ -35,10 +35,17 @@ public class UserController {
         String lastName = newUserJson.get("lastName").textValue();
         Set<Role> roles = new HashSet<>();
         roles.add(Role.USER);
-        System.out.println(newUserJson);
         User user = new User(username, password, email, firstName, lastName, roles);
-        System.out.println(user);
         return userRepo.save(user);
+    }
+
+    @PutMapping("/user")
+    public User editUser(@AuthenticationPrincipal UserDetails userDetails,
+                         @RequestBody JsonNode userJson) {
+        User user = userRepo.findByUsername(userDetails.getUsername()).get();
+        System.out.println(user);
+        System.out.println(userJson);
+        return user;
     }
 
     @DeleteMapping("/user/delete")

@@ -13,7 +13,8 @@ function EditProject(props) {
         <form className="m-3">
             <div className="form-group">
                 <label htmlFor="projectName">Название</label>
-                <input type="text" className="form-control" id="projectName" defaultValue={currentProject.name}>
+                <input type="text" className="form-control" id="projectName"
+                       defaultValue={currentProject.name} required>
                 </input>
             </div>
             <div className="form-group">
@@ -22,7 +23,7 @@ function EditProject(props) {
                           defaultValue={currentProject.description}>
                 </textarea>
             </div>
-            <button type="submit" className="btn btn-primary mx-1" onClick={editProjectHandler}>Сохранить</button>
+            <button type="submit" className="btn btn-primary mx-1">Сохранить</button>
             <button type="button" className="btn btn-secondary mx-1" onClick={editProjectHandler}>Отмена</button>
         </form>
     );

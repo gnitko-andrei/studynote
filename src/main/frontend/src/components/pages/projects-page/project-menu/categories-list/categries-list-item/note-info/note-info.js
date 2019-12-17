@@ -12,12 +12,14 @@ function EditNote(props) {
             <form className="m-3">
                 <div className="form-group">
                     <label htmlFor="noteName">Название</label>
-                    <input type="text" className="form-control" id="noteName" defaultValue={currentNote.name}>
+                    <input type="text" className="form-control" id="noteName"
+                           defaultValue={currentNote.name} required>
                     </input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="noteLink">Ссылка</label>
-                    <input type="text" className="form-control" id="noteLink" defaultValue={currentNote.link}>
+                    <input type="text" className="form-control" id="noteLink"
+                           defaultValue={currentNote.link} required>
                     </input>
                 </div>
                 <div className="form-group">
@@ -35,7 +37,7 @@ function EditNote(props) {
                               defaultValue={currentNote.description}>
                 </textarea>
                 </div>
-                <button type="submit" className="btn btn-primary mx-1" onClick={props.editNoteHandler}>Сохранить
+                <button type="submit" className="btn btn-primary mx-1">Сохранить
                 </button>
                 <button type="button" className="btn btn-secondary mx-1" onClick={props.editNoteHandler}>Отмена</button>
             </form>

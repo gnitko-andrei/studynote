@@ -28,58 +28,103 @@ function UserInfo(props) {
     )
 }
 
-function EditUser(props) {
-    const {editUserHandler} = props;
-    const {username, firstName, lastName, email} = props.user;
-    return (
-        <>
-            <form className="m-3">
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label"> Логин :</label>
-                    <div className="col-lg-6">
-                        <input type="text" name="username" className="form-control" defaultValue={username}/>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Пароль:</label>
+class EditUser extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            password: '',
+            confirmPassword: '',
+            email: props.user.email,
+            firstName: props.user.firstName,
+            lastName: props.user.lastName
+        }
+    }
 
-                    <div className="col-lg-6">
-                        <input type="password" name="password" className="form-control"/>
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+        this.validatePassword();
+    };
+
+    handleSubmit = (event) => {
+        const {password, email,
+            firstName, lastName} = this.state;
+        const user = {
+            username: '',
+            password: password,
+            email: email,
+            firstName: firstName,
+            lastName: lastName
+        };
+
+    };
+
+    validatePassword = () => {
+        const input = document.getElementById("password");
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        if(password !== confirmPassword) {
+            input.setCustomValidity('Пароли не совпадают')
+        } else {
+            input.setCustomValidity('')
+        }
+
+    };
+
+    render() {
+        const {editUserHandler} = this.props;
+        return (
+            <>
+                <form className="m-3" onSubmit={this.handleSubmit}>
+                    <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Пароль:</label>
+
+                        <div className="col-lg-6">
+                            <input type="password" name="password" className="form-control" required
+                                   id="password"  onChange={this.handleInputChange} value={this.state.password}/>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Подтверждение пароля:</label>
-                    <div className="col-lg-6">
-                        <input type="password" name="confirmPassword" className="form-control"
-                               aria-describedby="confirmPasswordHelp"/>
-                        <small id="confirmPasswordHelp" className="form-text text-muted">
-                            Введите пароль ещё раз чтобы проверить что вы не ошиблись
-                        </small>
+                    <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Подтверждение пароля:</label>
+                        <div className="col-lg-6">
+                            <input type="password" name="confirmPassword" className="form-control"
+                                   aria-describedby="confirmPasswordHelp" id="confirmPassword" required
+                                   onChange={this.handleInputChange} value={this.state.confirmPassword}/>
+                            <small id="confirmPasswordHelp" className="form-text text-muted">
+                                Введите пароль ещё раз чтобы проверить что вы не ошиблись
+                            </small>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Адрес электронной почты:</label>
-                    <div className="col-lg-6">
-                        <input type="email" name="email" className="form-control" defaultValue={email}/>
+                    <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Адрес электронной почты:</label>
+                        <div className="col-lg-6">
+                            <input type="email" name="email" className="form-control" required
+                                   onChange={this.handleInputChange} value={this.state.email}/>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Имя:</label>
-                    <div className="col-lg-6">
-                        <input type="text" name="firstName" className="form-control" defaultValue={firstName}/>
+                    <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Имя:</label>
+                        <div className="col-lg-6">
+                            <input type="text" name="firstName" className="form-control"
+                                   onChange={this.handleInputChange} value={this.state.firstName}/>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Фамилия:</label>
-                    <div className="col-lg-6">
-                        <input type="text" name="LastName" className="form-control" defaultValue={lastName}/>
+                    <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Фамилия:</label>
+                        <div className="col-lg-6">
+                            <input type="text" name="lastName" className="form-control"
+                                   onChange={this.handleInputChange} value={this.state.lastName}/>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" className="btn btn-primary mx-1">Сохранить</button>
-                <button type="button" className="btn btn-secondary mx-1" onClick={editUserHandler}>Отмена</button>
-            </form>
-        </>
-    )
+                    <button type="submit" className="btn btn-primary mx-1">Сохранить</button>
+                    <button type="button" className="btn btn-secondary mx-1" onClick={editUserHandler}>Отмена</button>
+                </form>
+            </>
+        )
+    }
 }
 
 export default class UserProfilePage extends Component {
