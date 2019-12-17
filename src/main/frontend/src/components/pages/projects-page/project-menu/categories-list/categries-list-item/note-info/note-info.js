@@ -24,13 +24,12 @@ function EditNote(props) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="noteStatus">Статус</label>
-                    <div className="btn-group-vertical m-2" role="group" id="noteStatus">
-                        <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
-                        <button type="button" className="btn btn-outline-primary">Изучаю</button>
-                        <button type="button" className="btn btn-outline-secondary">Завершённые</button>
-                    </div>
+                    <select className="form-control" id="noteStatus">
+                        <option>Посмотреть позже</option>
+                        <option>Изучаю</option>
+                        <option selected>Завершённые</option>
+                    </select>
                 </div>
-
                 <div className="form-group">
                     <label htmlFor="projectDescription">Описание</label>
                     <textarea className="form-control" id="projectDescription" rows="5"
