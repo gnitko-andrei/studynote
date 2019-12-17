@@ -1,15 +1,16 @@
 package com.gnitko.studynote.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.gnitko.studynote.entity.Role;
 import com.gnitko.studynote.entity.User;
 import com.gnitko.studynote.repo.UserRepo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @RestController
 @CrossOrigin
@@ -21,7 +22,28 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public User getAllUsers(@AuthenticationPrincipal UserDetails user) {
+    public User getUser(@AuthenticationPrincipal UserDetails user) {
         return userRepo.findByUsername(user.getUsername()).get();
+    }
+
+    @PostMapping("/registration")
+    public User registration(@RequestBody JsonNode newUserJson) {
+        String username = newUserJson.get("username").textValue();
+        String password = newUserJson.get("password").textValue();
+        String email = newUserJson.get("email").textValue();
+        String firstName = newUserJson.get("firstName").textValue();
+        String lastName = newUserJson.get("lastName").textValue();
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.USER);
+        System.out.println(newUserJson);
+        User user = new User(username, password, email, firstName, lastName, roles);
+        System.out.println(user);
+        return userRepo.save(user);
+    }
+
+    @DeleteMapping("/user/delete")
+    public void deleteProject(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userRepo.findByUsername(userDetails.getUsername()).get();
+        userRepo.delete(user);
     }
 }

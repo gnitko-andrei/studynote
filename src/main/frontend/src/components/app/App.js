@@ -38,7 +38,8 @@ class App extends React.Component {
                     username: null,
                     loggedIn: false
                 });
-                localStorage.setItem('loggedIn', this.state.loggedIn);
+                localStorage.removeItem('authData');
+                localStorage.removeItem('loggedIn');
             }
         });
     }

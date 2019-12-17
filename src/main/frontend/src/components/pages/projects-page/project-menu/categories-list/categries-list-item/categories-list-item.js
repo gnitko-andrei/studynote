@@ -24,7 +24,7 @@ function EditCategory(props) {
 }
 
 function CategoryBody(props) {
-    const {loading, categoryName, editCategoryHandler, notes, setCurrentNote, currentNote} = props;
+    const {loading, category, editCategoryHandler, notes, setCurrentNote, currentNote} = props;
     if (loading) {
         return (
             <div className="d-flex justify-content-center">
@@ -38,7 +38,7 @@ function CategoryBody(props) {
         <div className="row">
             <div className="col-lg-4">
                 <div className="">
-                    <NotesList notes={notes} categoryName={categoryName}
+                    <NotesList notes={notes} category={category}
                                editCategoryHandler={editCategoryHandler}
                                setCurrentNote={setCurrentNote}/>
                 </div>
@@ -56,7 +56,7 @@ export default class CategoriesListItem extends Component {
         this.state = {
             loading: true,
             editCategory: false,
-            categoryId: props.categoryId,
+            category: props.category,
             currentNote: null,
             error: false
         };
@@ -64,9 +64,9 @@ export default class CategoriesListItem extends Component {
 
     getNotes() {
         const {getAction} = requests;
-        const {categoryId} = this.state;
+        const {category} = this.state;
 
-        getAction(`/${categoryId}/notes`).then((data) => {
+        getAction(`/${category.id}/notes`).then((data) => {
             if (data) {
                 this.setState({
                     loading: false,
@@ -99,23 +99,23 @@ export default class CategoriesListItem extends Component {
     };
 
     render() {
-        const {categoryName} = this.props;
-        const {loading, editCategory, notes, currentNote, error} = this.state;
+        const {loading, editCategory, notes, currentNote, error, category} = this.state;
         if(error) {
             return <ErrorIndicator/>
         }
+        const categoryNameReplaced = category.name.replace(/\s+/g, '');
         return (
             <>
-                <button className="list-group-item list-group-item-action" id={categoryName + '-heading'}
-                   data-toggle="collapse" data-target={'#' + categoryName} aria-expanded="false"
-                   aria-controls={categoryName}>
-                    {categoryName}
+                <button className="list-group-item list-group-item-action" id={categoryNameReplaced + '-heading'}
+                   data-toggle="collapse" data-target={'#' + categoryNameReplaced} aria-expanded="false"
+                   aria-controls={'#' + categoryNameReplaced}>
+                    {category.name}
                 </button>
-                <div id={categoryName} className="collapse" aria-labelledby={categoryName + '-heading'}
+                <div id={categoryNameReplaced} className="collapse" aria-labelledby={categoryNameReplaced + '-heading'}
                      data-parent="#categories-accordion">
                     {editCategory ?
-                        <EditCategory categoryName={categoryName} editCategoryHandler={this.editCategoryHandler}/> :
-                        <CategoryBody loading={loading} notes={notes} categoryName={categoryName}
+                        <EditCategory categoryName={category.name} editCategoryHandler={this.editCategoryHandler}/> :
+                        <CategoryBody loading={loading} notes={notes} category={category}
                                       setCurrentNote={this.setCurrentNote}
                                       currentNote={currentNote}
                                       editCategoryHandler={this.editCategoryHandler}/>}

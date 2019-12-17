@@ -13,13 +13,10 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
     @Type(type = "text")
     private String description;
-    @Column(nullable = false)
-    @ColumnDefault(value = "'SEE_LATER'")
-    private String status;
 
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -27,11 +24,24 @@ public class Project {
     private User user;
 
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class, mappedBy = "project",
+    @OneToMany(targetEntity = Category.class, mappedBy = "project",
             fetch = FetchType.EAGER)
     private Set<Category> categories;
 
     public Project() {
+    }
+
+    public Project(String name, String description, User user) {
+        this.name = name;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Project(String name, String description, User user, Set<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.user = user;
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -58,14 +68,6 @@ public class Project {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public User getUser() {
         return user;
     }
@@ -80,5 +82,15 @@ public class Project {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
     }
 }

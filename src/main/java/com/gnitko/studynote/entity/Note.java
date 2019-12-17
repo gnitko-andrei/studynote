@@ -12,15 +12,14 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String link;
     @Type(type = "text")
     private String description;
-    @Column(nullable = false)
     @ColumnDefault(value = "'SEE_LATER'")
-    private String status;
+    private String status = "SEE_LATER";
 
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -28,6 +27,13 @@ public class Note {
     private Category category;
 
     public Note() {
+    }
+
+    public Note(String name, String link, String description, Category category) {
+        this.name = name;
+        this.link = link;
+        this.description = description;
+        this.category = category;
     }
 
     public Long getId() {
@@ -76,5 +82,17 @@ public class Note {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

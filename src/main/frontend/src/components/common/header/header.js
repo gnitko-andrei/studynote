@@ -18,7 +18,7 @@ function Login(props) {
 function Logout(props) {
     const {username, handleSubmit} = props;
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="login-form form-inline" onSubmit={handleSubmit}>
             <span className="mx-1">{username}</span>
             <button className="btn btn-outline-secondary btn-sm mx-1"
                     role="submit" to="/">Выйти
@@ -30,8 +30,8 @@ function Logout(props) {
 
 export default class Header extends Component {
     handleSubmit = () => {
-        localStorage.setItem('authData', '');
-        localStorage.setItem('loggedIn', '');
+        localStorage.removeItem('authData');
+        localStorage.removeItem('loggedIn');
     };
 
     render() {
@@ -56,8 +56,8 @@ export default class Header extends Component {
                             <li className="nav-item"><Link to="/user-profile" className="nav-link" hidden={!loggedIn}>Личный
                                 кабинет</Link></li>
                         </ul>
-                    </div>
                     {!loggedIn ? <Login/> : <Logout username={username} handleSubmit={this.handleSubmit}/>}
+                    </div>
                 </nav>
             </header>
         );

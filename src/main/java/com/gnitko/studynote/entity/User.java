@@ -28,10 +28,20 @@ public class User {
 
     @JsonBackReference
     @OneToMany(targetEntity = Project.class, mappedBy = "user",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY)
     private Set<Project> projects;
 
     public User() {
+    }
+
+    public User(String username, String password, String email, String firstName, String lastName, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = roles;
+        this.active = true;
     }
 
     public Long getId() {
@@ -104,5 +114,19 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", active=" + active +
+                ", role=" + role +
+                '}';
     }
 }

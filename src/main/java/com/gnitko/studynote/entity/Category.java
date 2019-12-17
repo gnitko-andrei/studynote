@@ -11,7 +11,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @JsonManagedReference
@@ -21,10 +21,15 @@ public class Category {
 
     @JsonBackReference
     @OneToMany(targetEntity = Note.class, mappedBy = "category",
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.EAGER)
     private Set<Note> notes;
 
     public Category() {
+    }
+
+    public Category(String name, Project project) {
+        this.name = name;
+        this.project = project;
     }
 
     public Long getId() {
@@ -57,5 +62,14 @@ public class Category {
 
     public void setNotes(Set<Note> notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", project=" + project +
+                '}';
     }
 }

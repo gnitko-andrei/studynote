@@ -1,13 +1,11 @@
 package com.gnitko.studynote.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.gnitko.studynote.entity.Category;
 import com.gnitko.studynote.entity.Project;
 import com.gnitko.studynote.repo.CategoryRepo;
 import com.gnitko.studynote.repo.ProjectRepo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +25,15 @@ public class CategoryController {
         return categoryRepo.findAllByProject(project);
     }
 
-    @GetMapping("categories/{category}")
-    public Category getProjectCategoryByName(@PathVariable Category category) {
-        return category;
+    @PostMapping("/{project}/categories")
+    public Category newCategory(@PathVariable Project project, @RequestBody JsonNode newCategoryJson) {
+        String name = newCategoryJson.get("name").textValue();
+        Category category = new Category(name, project);
+        return categoryRepo.save(category);
+    }
+
+    @DeleteMapping("/categories/{category}")
+    public void deleteProject(@PathVariable Category category) {
+        categoryRepo.delete(category);
     }
 }

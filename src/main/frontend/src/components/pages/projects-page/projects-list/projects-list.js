@@ -3,9 +3,39 @@ import React, {Component} from 'react';
 import './projects-list.css';
 import ProjectsListItem from "./projects-list-item";
 import AddButton from "../../../common/buttons/add-button";
+import requests from "../../../../requests/requests";
 
 
 export default class ProjectsList extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            projectName: '',
+            projectDescription: ''
+        }
+    }
+    newProject(project) {
+        const {postAction} = requests;
+        postAction("/projects", project)
+    }
+
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleSubmit = (event) => {
+        const {projectName, projectDescription} = this.state;
+        const project = {
+            name: projectName,
+            description: projectDescription
+        };
+        this.newProject(project);
+    };
+
     render() {
         const {projects, setCurrentProject} = this.props;
         return (
@@ -32,16 +62,20 @@ export default class ProjectsList extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="modal-body">
 
                                     <div className="form-group">
                                         <label htmlFor="projectName">Название</label>
-                                        <input type="text" className="form-control" id="projectName"/>
+                                        <input type="text" className="form-control" id="projectName"
+                                               name="projectName"
+                                               onChange={this.handleInputChange} value={this.state.projectName}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="projectDescription">Описание</label>
-                                        <textarea className="form-control" id="projectDescription" rows="5"/>
+                                        <textarea className="form-control" id="projectDescription"
+                                                  name="projectDescription" rows="5"
+                                                  onChange={this.handleInputChange} value={this.state.projectDescription}/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

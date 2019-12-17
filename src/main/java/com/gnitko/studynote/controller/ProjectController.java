@@ -1,15 +1,13 @@
 package com.gnitko.studynote.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.gnitko.studynote.entity.Project;
 import com.gnitko.studynote.entity.User;
 import com.gnitko.studynote.repo.ProjectRepo;
 import com.gnitko.studynote.repo.UserRepo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +28,18 @@ public class ProjectController {
         return projectRepo.findAllByUser(user);
     }
 
-    @GetMapping("/projects/{project}")
-    public Project getUserProjectByName(@PathVariable Project project) {
-        return project;
+
+    @PostMapping("/projects")
+    public Project newProject(@AuthenticationPrincipal UserDetails userDetails, @RequestBody JsonNode newProjectJson) {
+        User user = userRepo.findByUsername(userDetails.getUsername()).get();
+        String name = newProjectJson.get("name").textValue();
+        String description = newProjectJson.get("description").textValue();
+        Project project = new Project(name, description, user);
+        return projectRepo.save(project);
     }
 
+    @DeleteMapping("/projects/{project}")
+    public void deleteProject(@PathVariable Project project) {
+        projectRepo.delete(project);
+    }
 }

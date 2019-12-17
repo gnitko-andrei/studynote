@@ -8,7 +8,7 @@ export default class EditButton extends Component {
         return (
             <button type="button"
                     className="btn btn-outline-info btn-sm ml-1" onClick={onClick}>
-                <i className="fa fa-edit"></i>
+                <i className="fa fa-edit"/>
             </button>
         )
     }

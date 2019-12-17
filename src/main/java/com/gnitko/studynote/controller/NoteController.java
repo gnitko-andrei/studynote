@@ -1,13 +1,11 @@
 package com.gnitko.studynote.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.gnitko.studynote.entity.Category;
 import com.gnitko.studynote.entity.Note;
 import com.gnitko.studynote.repo.CategoryRepo;
 import com.gnitko.studynote.repo.NoteRepo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,11 +13,9 @@ import java.util.List;
 @CrossOrigin
 public class NoteController {
     private final NoteRepo noteRepo;
-    private final CategoryRepo categoryRepo;
 
-    public NoteController(NoteRepo noteRepo, CategoryRepo categoryRepo) {
+    public NoteController(NoteRepo noteRepo) {
         this.noteRepo = noteRepo;
-        this.categoryRepo = categoryRepo;
     }
 
     @GetMapping("/{category}/notes")
@@ -27,8 +23,17 @@ public class NoteController {
         return noteRepo.findAllByCategory(category);
     }
 
-    @GetMapping("/notes/{note}")
-    public Note getCategoryNoteByName(@PathVariable Note note) {
-        return note;
+    @PostMapping("/{category}/notes")
+    public Note newCategory(@PathVariable Category category, @RequestBody JsonNode newNoteJson) {
+        String name = newNoteJson.get("name").textValue();
+        String link = newNoteJson.get("link").textValue();
+        String description = newNoteJson.get("description").textValue();
+        Note note = new Note(name, link, description, category);
+        return noteRepo.save(note);
+    }
+
+    @DeleteMapping("/notes/{note}")
+    public void deleteProject(@PathVariable Note note) {
+        noteRepo.delete(note);
     }
 }

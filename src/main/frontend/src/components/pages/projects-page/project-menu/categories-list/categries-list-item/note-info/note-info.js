@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './note-info.css'
 import EditButton from "../../../../../../common/buttons/edit-button";
 import DeleteButton from "../../../../../../common/buttons/delete-button";
+import requests from "../../../../../../../requests/requests";
 
 function EditNote(props) {
     const {currentNote} = props;
@@ -43,13 +44,13 @@ function EditNote(props) {
 }
 
 function NoteBody(props) {
-    const {currentNote, editNoteHandler} = props;
+    const {currentNote, editNoteHandler, deleteNoteHandler} = props;
     return (
         <>
             <h3 className="my-3">
                 {currentNote.name}
                 <EditButton onClick={editNoteHandler}/>
-                <DeleteButton/>
+                <DeleteButton onSubmit={deleteNoteHandler} contentId={`Note${currentNote.id}`}/>
             </h3>
             <h4>Статус</h4>
             <p>{currentNote.status}</p>
@@ -75,6 +76,16 @@ export default class NoteInfo extends Component {
         }));
     };
 
+    deleteNote() {
+        const {deleteAction} = requests;
+        const {currentNote} = this.props;
+        deleteAction(`/notes/${currentNote.id}`)
+    }
+
+    deleteNoteHandler = (event) => {
+        this.deleteNote()
+    };
+
     render() {
         const {editNote} = this.state;
         const {currentNote} = this.props;
@@ -84,7 +95,7 @@ export default class NoteInfo extends Component {
         return (
             <>
                 {editNote ? <EditNote currentNote={currentNote} editNoteHandler={this.editNoteHandler}/> :
-                    <NoteBody currentNote={currentNote} editNoteHandler={this.editNoteHandler}/>}
+                    <NoteBody currentNote={currentNote} deleteNoteHandler={this.deleteNoteHandler} editNoteHandler={this.editNoteHandler}/>}
             </>
         )
     }

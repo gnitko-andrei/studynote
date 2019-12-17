@@ -14,7 +14,8 @@ export default class CategoriesList extends Component {
             loading: true,
             categories: [],
             projectId: null,
-            error: false
+            error: false,
+            categoryName: ''
         };
     }
 
@@ -57,6 +58,28 @@ export default class CategoriesList extends Component {
         }
     }
 
+    newCategory(category) {
+        const {postAction} = requests;
+        const {projectId} = this.state;
+        postAction(`/${projectId}/categories`, category)
+    }
+
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleSubmit = (event) => {
+        const {categoryName} = this.state;
+        const category = {
+            name: categoryName,
+        };
+        this.newCategory(category);
+    };
+
     render() {
         const {loading, categories, error} = this.state;
         if(error) {
@@ -82,8 +105,7 @@ export default class CategoriesList extends Component {
                         {
                             categories.map((category) =>
                                 <CategoriesListItem key={category.id}
-                                                    categoryName={category.name}
-                                                    categoryId={category.id}/>
+                                                    category={category}/>
                             )}
                     </div>
                 </div>
@@ -98,12 +120,13 @@ export default class CategoriesList extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="modal-body">
-
                                     <div className="form-group">
-                                        <label htmlFor="projectName">Название</label>
-                                        <input type="text" className="form-control" id="projectName"/>
+                                        <label htmlFor="categoryName">Название</label>
+                                        <input type="text" className="form-control" id="categoryName"
+                                               name="categoryName"
+                                               onChange={this.handleInputChange} value={this.state.categoryName}/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

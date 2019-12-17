@@ -9,7 +9,9 @@ const headers = {
 let authdata1 = window.btoa(`user2:1`);
 let authdata = localStorage.getItem('authData');
 
-headers.Authorization = 'Basic ' + authdata;
+if(authdata !== '' && authdata !== null ) {
+    headers.Authorization = 'Basic ' + authdata;
+}
 
 const apiPathUrl = 'http://localhost:8080';
 
@@ -47,8 +49,7 @@ const async = {
             ...options,
             headers,
             credentials,
-            method: 'DELETE',
-            body: stringify(data),
+            method: 'DELETE'
         });
     },
 };
@@ -60,6 +61,7 @@ export default (method, ...args) => {
                 throw new Error(`Could not fetch ${response.url}` +
                     `, received ${response.status}`)
             }
+            if(method !== 'deleteJSON')
             return response.json();
         })
         .catch(error => {

@@ -4,11 +4,12 @@ import {Redirect} from 'react-router-dom';
 import './user-profile-page.css';
 import EditButton from "../../common/buttons/edit-button";
 import DeleteButton from "../../common/buttons/delete-button";
+import requests from "../../../requests/requests";
 
 
 function UserInfo(props) {
-    const {editUserHandler} = props;
-    const {username, firstName, lastName, email} = props.user;
+    const {editUserHandler, user, deleteUserHandler} = props;
+    const {username, firstName, lastName, email} = user;
     return (
         <>
             <dl className='row my-2'>
@@ -22,7 +23,7 @@ function UserInfo(props) {
                 <dd className="col-lg-10">{email}</dd>
             </dl>
             <EditButton onClick={editUserHandler}/>
-            <DeleteButton/>
+            <DeleteButton onSubmit={deleteUserHandler} contentId={`User${user.id}`}/>
         </>
     )
 }
@@ -95,6 +96,16 @@ export default class UserProfilePage extends Component {
         }))
     };
 
+    deleteUser() {
+        const {deleteAction} = requests;
+        deleteAction(`/user/delete`)
+            .then(localStorage.removeItem('authData'));
+    }
+
+    deleteUserHandler = (event) => {
+        this.deleteUser()
+    };
+
     render() {
         const {editUser} = this.state;
         const {loggedIn, user} = this.props;
@@ -104,7 +115,7 @@ export default class UserProfilePage extends Component {
         return (
             <div className="user-profile-page container m-5">
                 {editUser ? <EditUser user={user} editUserHandler={this.editUserHandler}/> :
-                    <UserInfo user={user} editUserHandler={this.editUserHandler}/>}
+                    <UserInfo user={user} editUserHandler={this.editUserHandler} deleteUserHandler={this.deleteUserHandler}/>}
             </div>
         )
     }
