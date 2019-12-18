@@ -18,8 +18,8 @@ public class Note {
     private String link;
     @Type(type = "text")
     private String description;
-    @ColumnDefault(value = "'SEE_LATER'")
-    private String status = "SEE_LATER";
+    @ColumnDefault(value = "'Посмотреть позже'")
+    private String status = "Посмотреть позже";
 
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

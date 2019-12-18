@@ -14,6 +14,13 @@ const postAction = (url, data) => {
     })
 };
 
+const putAction = (url, data) => {
+    return asyncAPI('putJSON', {
+        url: url,
+        data: data
+    })
+};
+
 const deleteAction = (url, data) => {
     return asyncAPI('deleteJSON', {
         url: url,
@@ -24,6 +31,7 @@ const deleteAction = (url, data) => {
 export  default {
     getAction,
     postAction,
+    putAction,
     deleteAction
 }
 

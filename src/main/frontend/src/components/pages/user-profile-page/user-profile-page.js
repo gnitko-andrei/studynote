@@ -32,12 +32,17 @@ class EditUser extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            currentPassword: '',
             password: '',
             confirmPassword: '',
-            email: props.user.email,
             firstName: props.user.firstName,
             lastName: props.user.lastName
         }
+    }
+
+    editUser(user) {
+        const {putAction} = requests;
+        putAction("/user", user)
     }
 
     handleInputChange = (event) => {
@@ -50,16 +55,16 @@ class EditUser extends Component{
     };
 
     handleSubmit = (event) => {
-        const {password, email,
+        const {currentPassword, password, email,
             firstName, lastName} = this.state;
         const user = {
-            username: '',
+            username: this.props.user.username,
+            currentPassword: currentPassword,
             password: password,
-            email: email,
             firstName: firstName,
             lastName: lastName
         };
-
+        this.editUser(user)
     };
 
     validatePassword = () => {
@@ -80,6 +85,13 @@ class EditUser extends Component{
             <>
                 <form className="m-3" onSubmit={this.handleSubmit}>
                     <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Текущий пароль:</label>
+                        <div className="col-lg-6">
+                            <input type="password" name="currentPassword" className="form-control" required
+                                   id="currentPassword"  onChange={this.handleInputChange} value={this.state.currentPassword}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
                         <label className="col-lg-2 col-form-label">Пароль:</label>
 
                         <div className="col-lg-6">
@@ -96,13 +108,6 @@ class EditUser extends Component{
                             <small id="confirmPasswordHelp" className="form-text text-muted">
                                 Введите пароль ещё раз чтобы проверить что вы не ошиблись
                             </small>
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label className="col-lg-2 col-form-label">Адрес электронной почты:</label>
-                        <div className="col-lg-6">
-                            <input type="email" name="email" className="form-control" required
-                                   onChange={this.handleInputChange} value={this.state.email}/>
                         </div>
                     </div>
                     <div className="form-group row">

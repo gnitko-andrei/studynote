@@ -32,6 +32,19 @@ public class NoteController {
         return noteRepo.save(note);
     }
 
+    @PutMapping("/notes/{note}")
+    public Note editNote(@PathVariable Note note, @RequestBody JsonNode editNoteJson) {
+        String name = editNoteJson.get("name").textValue();
+        String status = editNoteJson.get("status").textValue();
+        String link = editNoteJson.get("link").textValue();
+        String description = editNoteJson.get("description").textValue();
+        note.setName(name);
+        note.setStatus(status);
+        note.setLink(link);
+        note.setDescription(description);
+        return noteRepo.save(note);
+    }
+
     @DeleteMapping("/notes/{note}")
     public void deleteProject(@PathVariable Note note) {
         noteRepo.delete(note);

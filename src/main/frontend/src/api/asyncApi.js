@@ -44,6 +44,16 @@ const async = {
             mode: 'cors',
         });
     },
+    putJSON({url, data, params, options = {}}) {
+        return fetch(getFullUrl(url, params), {
+            ...options,
+            headers,
+            credentials,
+            method: 'PUT',
+            body: stringify(data),
+            mode: 'cors',
+        });
+    },
     deleteJSON({url, data, options = {}}) {
         return fetch(getFullUrl(url), {
             ...options,

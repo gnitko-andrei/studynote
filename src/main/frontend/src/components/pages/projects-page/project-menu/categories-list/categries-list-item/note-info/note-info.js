@@ -5,43 +5,85 @@ import EditButton from "../../../../../../common/buttons/edit-button";
 import DeleteButton from "../../../../../../common/buttons/delete-button";
 import requests from "../../../../../../../requests/requests";
 
-function EditNote(props) {
-    const {currentNote} = props;
-    return (
-        <>
-            <form className="m-3">
-                <div className="form-group">
-                    <label htmlFor="noteName">Название</label>
-                    <input type="text" className="form-control" id="noteName"
-                           defaultValue={currentNote.name} required>
-                    </input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="noteLink">Ссылка</label>
-                    <input type="text" className="form-control" id="noteLink"
-                           defaultValue={currentNote.link} required>
-                    </input>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="noteStatus">Статус</label>
-                    <select className="form-control" id="noteStatus">
-                        <option>Посмотреть позже</option>
-                        <option>Изучаю</option>
-                        <option selected>Завершённые</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="projectDescription">Описание</label>
-                    <textarea className="form-control" id="projectDescription" rows="5"
-                              defaultValue={currentNote.description}>
-                </textarea>
-                </div>
-                <button type="submit" className="btn btn-primary mx-1">Сохранить
-                </button>
-                <button type="button" className="btn btn-secondary mx-1" onClick={props.editNoteHandler}>Отмена</button>
-            </form>
-        </>
-    )
+class EditNote extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            noteName: props.currentNote.name,
+            noteLink: props.currentNote.link,
+            noteStatus: props.currentNote.status,
+            noteDescription: props.currentNote.description
+        }
+    }
+
+    editNote(note) {
+        const {currentNote} = this.props;
+        const {putAction} = requests;
+        putAction(`/notes/${currentNote.id}`, note)
+    }
+
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleSubmit = (event) => {
+        const {noteName, noteStatus, noteLink, noteDescription} = this.state;
+        const note = {
+            name: noteName,
+            link: noteLink,
+            status: noteStatus,
+            description: noteDescription
+        };
+        this.editNote(note)
+    };
+
+
+    render() {
+        const {noteName, noteLink, noteStatus, noteDescription} = this.state;
+        return (
+            <>
+                <form className="m-3" onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="noteName">Название</label>
+                        <input type="text" className="form-control" id="noteName"
+                               name="noteName" onChange={this.handleInputChange}
+                               value={noteName} required>
+                        </input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="noteLink">Ссылка</label>
+                        <input type="text" className="form-control" id="noteLink"
+                               name="noteLink" onChange={this.handleInputChange}
+                               value={noteLink} required>
+                        </input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="noteStatus">Статус</label>
+                        <select className="form-control" id="noteStatus" name="noteStatus"
+                                onChange={this.handleInputChange} value={noteStatus}>
+                            <option>Посмотреть позже</option>
+                            <option>Изучаю</option>
+                            <option>Завершённые</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="noteDescription">Описание</label>
+                        <textarea className="form-control" id="noteDescription" rows="5"
+                                  name="noteDescription" onChange={this.handleInputChange}
+                                  value={noteDescription}>
+                        </textarea>
+                    </div>
+                    <button type="submit" className="btn btn-primary mx-1">Сохранить
+                    </button>
+                    <button type="button" className="btn btn-secondary mx-1" onClick={this.props.editNoteHandler}>Отмена</button>
+                </form>
+            </>
+        )
+    }
 }
 
 function NoteBody(props) {

@@ -38,6 +38,15 @@ public class ProjectController {
         return projectRepo.save(project);
     }
 
+    @PutMapping("/projects/{project}")
+    public Project editProject(@PathVariable Project project, @RequestBody JsonNode editProjectJson) {
+        String name = editProjectJson.get("name").textValue();
+        String description = editProjectJson.get("description").textValue();
+        project.setName(name);
+        project.setDescription(description);
+        return projectRepo.save(project);
+    }
+
     @DeleteMapping("/projects/{project}")
     public void deleteProject(@PathVariable Project project) {
         projectRepo.delete(project);

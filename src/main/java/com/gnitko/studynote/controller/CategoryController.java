@@ -32,6 +32,13 @@ public class CategoryController {
         return categoryRepo.save(category);
     }
 
+    @PutMapping("/categories/{category}")
+    public Category editCategory(@PathVariable Category category, @RequestBody JsonNode editCategoryJson) {
+        String name = editCategoryJson.get("name").textValue();
+        category.setName(name);
+        return categoryRepo.save(category);
+    }
+
     @DeleteMapping("/categories/{category}")
     public void deleteProject(@PathVariable Category category) {
         categoryRepo.delete(category);

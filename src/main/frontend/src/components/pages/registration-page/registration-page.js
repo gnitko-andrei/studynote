@@ -15,13 +15,31 @@ export default class RegistrationPage extends Component {
             confirmPassword: '',
             email: '',
             firstName: '',
-            lastName: ''
+            lastName: '',
+            registrationStatus: null
+        };
+    }
+
+    componentDidMount() {
+        if(localStorage.getItem('registrationStatus') !== "undefined") {
+            this.setState({
+                registrationStatus: localStorage.getItem('registrationStatus')
+            })
         }
+
     }
 
     newUser(user) {
         const {postAction} = requests;
         postAction("/registration", user)
+            .then((data) => {
+                if(data !== 'ok') {
+                    localStorage.setItem('registrationStatus', data)
+                } else {
+                     localStorage.removeItem('registrationStatus')
+                }
+
+            })
     }
 
     handleInputChange = (event) => {
@@ -60,6 +78,7 @@ export default class RegistrationPage extends Component {
 
     render() {
         const {loggedIn} = this.props;
+        const {registrationStatus} = this.state;
 
         if(loggedIn) {
             return <Redirect to="/"/>
@@ -68,6 +87,7 @@ export default class RegistrationPage extends Component {
         return (
             <div className="registration-page form-group m-5">
                 <form onSubmit={this.handleSubmit}>
+                    <p id="registrationStatus">{registrationStatus !== undefined ? registrationStatus : null}</p>
                     <div className="form-group row">
                         <label className="col-lg-2 col-form-label"> Логин :</label>
                         <div className="col-lg-6">

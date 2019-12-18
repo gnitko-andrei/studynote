@@ -6,22 +6,55 @@ import NoteInfo from "./note-info";
 import requests from "../../../../../../requests/requests";
 import ErrorIndicator from "../../../../../common/error-indicator";
 
-function EditCategory(props) {
-    const {editCategoryHandler, categoryName} = props;
-    return (
-        <form className="m-3 row">
-            <div className="form-group-inline row col-lg-7 mx-2">
-                <label className="col-lg-3 col-form-label" htmlFor="categoryName">Название</label>
-                <input type="text" className="form-control col-lg-9" id="categoryName"
-                       defaultValue={categoryName} required>
-                </input>
-            </div>
-            <button type="submit" className="btn btn-primary col-lg-2 mx-1">Сохранить
-            </button>
-            <button type="button" className="btn btn-secondary col-lg-2 mx-1" onClick={editCategoryHandler}>Отмена
-            </button>
-        </form>
-    );
+class EditCategory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            categoryName: props.category.name,
+        }
+    }
+
+    editCategory(editCategory) {
+        const {category} = this.props;
+        const {putAction} = requests;
+        putAction(`/categories/${category.id}`, editCategory)
+    }
+
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleSubmit = (event) => {
+        const {categoryName} = this.state;
+        const category = {
+            name: categoryName,
+        };
+        this.editCategory(category)
+    };
+
+    render() {
+        const {editCategoryHandler, category} = this.props;
+        const {categoryName} = this.state;
+        return (
+            <form className="m-3 row" onSubmit={this.handleSubmit}>
+                <div className="form-group-inline row col-lg-7 mx-2">
+                    <label className="col-lg-3 col-form-label" htmlFor="categoryName">Название</label>
+                    <input type="text" className="form-control col-lg-9" id="categoryName" name="categoryName"
+                           onChange={this.handleInputChange} value={categoryName} required>
+                    </input>
+                </div>
+                <button type="submit" className="btn btn-primary col-lg-2 mx-1">Сохранить
+                </button>
+                <button type="button" className="btn btn-secondary col-lg-2 mx-1" onClick={editCategoryHandler}>Отмена
+                </button>
+            </form>
+        );
+    }
+
 }
 
 function CategoryBody(props) {
@@ -115,7 +148,7 @@ export default class CategoriesListItem extends Component {
                 <div id={categoryNameReplaced} className="collapse" aria-labelledby={categoryNameReplaced + '-heading'}
                      data-parent="#categories-accordion">
                     {editCategory ?
-                        <EditCategory categoryName={category.name} editCategoryHandler={this.editCategoryHandler}/> :
+                        <EditCategory category={category} editCategoryHandler={this.editCategoryHandler}/> :
                         <CategoryBody loading={loading} notes={notes} category={category}
                                       setCurrentNote={this.setCurrentNote}
                                       currentNote={currentNote}
