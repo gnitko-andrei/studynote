@@ -6,6 +6,7 @@ import AddButton from "../../../../../../common/buttons/add-button";
 import EditButton from "../../../../../../common/buttons/edit-button";
 import DeleteButton from "../../../../../../common/buttons/delete-button";
 import requests from "../../../../../../../requests/requests";
+import NotesStatusFilter from "./notes-status-filter";
 
 export default class NotesList extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ export default class NotesList extends Component {
             notes: [],
             noteName: '',
             noteLink: '',
-            noteDescription: ''
+            noteDescription: '',
+            filter: 'Все'
         };
     }
 
@@ -69,11 +71,40 @@ export default class NotesList extends Component {
         this.newNote(note);
     };
 
+    filter = (items, filter) => {
+        switch (filter) {
+            case 'Все':
+                return items;
+            case 'Посмотреть позже':
+                return items.map((item) => {
+                    return item.status !== 'Посмотреть позже' ? null : item
+                });
+            case 'Изучаю':
+                return items.map((item) => {
+                    return item.status !== 'Изучаю' ? null : item
+                });
+            case 'Завершённые':
+                return items.map((item) => {
+                    return item.status !== 'Завершённые' ? null : item
+                });
+            default:
+                return items;
+        }
+    };
+
+    onFilterChange = (filter) => {
+        this.setState({filter});
+    };
+
     render() {
-        const {notes} = this.state;
+
+        const {notes, filter} = this.state;
         const {setCurrentNote} = this.props;
         const {category, editCategoryHandler} = this.props;
         const categoryNameReplaced = category.name.replace(/\s+/g, '');
+        const visibleNotes = this.filter(notes, filter).filter((item) => {
+            return item !== undefined && item !== null;
+        });
         if (!notes) {
             return (<></>)
         }
@@ -84,16 +115,12 @@ export default class NotesList extends Component {
                     <EditButton onClick={editCategoryHandler}/>
                     <DeleteButton onSubmit={this.deleteCategoryHandler} contentId={`Category${category.id}`}/>
                 </h4>
-                <div className="btn-group-vertical btn-group-sm my-2" role="group">
-                    <button type="button" className="btn btn-outline-info">Посмотреть позже</button>
-                    <button type="button" className="btn btn-outline-primary">Изучаю</button>
-                    <button type="button" className="btn btn-outline-secondary">Завершённые</button>
-                </div>
+                <NotesStatusFilter filter={filter} onFilterChange={this.onFilterChange}/>
                 <div className="list-group">
                     <div className="list-group-item list-group-item-action active">
                         <AddButton modalId={'#' + categoryNameReplaced + "NoteModal"}/>
                     </div>
-                    {notes.map((note) =>
+                    {visibleNotes.map((note) =>
                         <NotesListItem key={note.id}
                                        note={note}
                                        setCurrentNote={setCurrentNote}/>
